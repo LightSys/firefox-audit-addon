@@ -10,10 +10,14 @@
     "48": "icons/placeholder.png"
   },
 
+  "permissions": [
+    "<all_urls>"
+  ],
+
   "content_scripts": [
     {
      "matches": ["<all_urls>"],
-     "js": ["security.js"]
+     "js": ["node_modules/jquery/dist/jquery.js", "security.js"]
     }
   ]
 
