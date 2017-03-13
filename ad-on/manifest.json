@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "Lightsys Browser Addon Audit",
+  "version": "0.0.1",
+
+  "description": "An extension that ensures that your addons and browser settings do not compromise security.",
+
+  "icons": {
+    "48": "icons/placeholder.png"
+  },
+
+  "content_scripts": [
+    {
+     "matches": ["<all_urls>"],
+     "js": ["security.js"]
+    }
+  ]
+
+}
