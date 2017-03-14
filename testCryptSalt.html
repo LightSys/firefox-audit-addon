@@ -8,17 +8,27 @@
 		$(document).ready( function() { 
 			var str = "testString";
 			encryptText(str);
+			rand();
 		});
 		
-		function Hex2Bin(n){return parseInt(n,16).toString(2)}
+		function Hex2Bin(n){return parseInt(n,16).toString(2)} //Converts Hex to Bianary.
 
 		function encryptText(str){
 			var hash =  CryptoJS.SHA256(str);
 			alert(Hex2Bin(hash.toString(CryptoJS.enc.Raw)));
 			return hash.toString(CryptoJS.enc.Raw);
+			//encrypts the text given to it in Sha256 and returns it as a Bianary number.
 		}
 		
-	
+		function rand(){
+			var seed = Math.random() * 692;
+			var hashseed = CryptoJS.SHA1(seed);
+			var state = hashseed;
+			var randual = CryptoJS.MD5(state);
+			alert(randual.toString(CryptoJS.Hex));
+			return randual.toString(CryptoJS.Hex);
+			//Creates a Random Number from three different values.
+		}	
 	</script>
 </head>
 <body>	
