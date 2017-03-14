@@ -1,0 +1,16 @@
+{
+  "title": "X-Audit",
+  "name": "x-audit",
+  "version": "0.0.1",
+  "description": "An add-on to audit the security of the browser.",
+  "main": "index.js",
+  "author": "Jason Ross",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ]
+}
