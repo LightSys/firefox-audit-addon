@@ -4,3 +4,5 @@ $.ajax({
   dataType: "json",
   success: function(response) {
     console.log(response);
+  }
+});
