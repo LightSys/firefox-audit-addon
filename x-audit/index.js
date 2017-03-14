@@ -4,8 +4,8 @@ var settings = require("settings");
 
 function init() {
 	enumeration.getAddonList();
-	//settings.getPrefList(settings);
-	
+	var list = ["app.update.altwindowtype", "app.update.badgeWaitTime", "app.update.enabled", "phil"];
+	var results = settings.getPrefList(list);
 }
 
 exports.main = init;
