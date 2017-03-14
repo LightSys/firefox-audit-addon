@@ -7,15 +7,19 @@
 	<script type="text/javascript">
 		$(document).ready( function() { 
 			var str = "testString";
+			var array = new Uint32Array(10);
 			encryptText(str);
+			alert(window.crypto.getRandomValues(array));
 		});
+		
+		function Hex2Bin(n){return parseInt(n,16).toString(2)} //Converts Hex to Bianary.
 
 		function encryptText(str){
 			var hash =  CryptoJS.SHA256(str);
-			return hash.toString(CryptoJS.enc.Hex);
+			alert(Hex2Bin(hash.toString(CryptoJS.enc.Raw)));
+			return hash.toString(CryptoJS.enc.Raw);
+			//encrypts the text given to it in Sha256 and returns it as a Bianary number.
 		}
-		
-	
 	</script>
 </head>
 <body>	
