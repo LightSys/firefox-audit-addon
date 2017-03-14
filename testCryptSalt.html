@@ -9,10 +9,13 @@
 			var str = "testString";
 			encryptText(str);
 		});
+		
+		function Hex2Bin(n){return parseInt(n,16).toString(2)}
 
 		function encryptText(str){
 			var hash =  CryptoJS.SHA256(str);
-			return hash.toString(CryptoJS.enc.Hex);
+			alert(Hex2Bin(hash.toString(CryptoJS.enc.Raw)));
+			return hash.toString(CryptoJS.enc.Raw);
 		}
 		
 	
