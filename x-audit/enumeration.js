@@ -11,8 +11,8 @@ function getAddonList() {
 	AddonManager.getAllAddons(function(allAddons){
 		for (i = 0; i < allAddons.length; i++){
 		addon = allAddons[i]; 
-		addonId = (addon.id).toString();	
-		addonName = (addon.name).toString(); 
+		addonId = addon.id;	
+		addonName = addon.name; 
 		addonObject = {id: addonId, name: addonName};
 		addons.push(addonObject);
 		}
