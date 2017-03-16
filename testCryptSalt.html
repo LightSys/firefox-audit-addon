@@ -7,19 +7,87 @@
 	<script type="text/javascript">
 		$(document).ready( function() { 
 			var str = "testString";
-			var array = new Uint32Array(10);
-			hashText(str);
-			hashText(window.crypto.getRandomValues(array));
+			var array = new Uint32Array(512);
+			hashText256(str);
+			hashText512(window.crypto.getRandomValues(array));
+			var threeTest = Math.floor(Math.random()*3);
+			var tenTest = Math.floor(Math.random()*10);
+			switch(threeTest){
+			case 0:
+				alert("0");
+				break;
+			case 1:
+				alert("1");
+				break;
+			case 2:
+				alert("2");
+				break;
+			}
+
+			switch(tenTest){
+			case 0:
+				alert("0");
+				break;
+			case 1:
+				alert("1");
+				break;
+			case 2:
+				alert("2");
+				break;
+			case 3:
+				alert("3");
+				break;
+			case 4: 
+				alert("4");
+				break;
+			case 5:
+				alert("5");
+				break;
+			case 6:
+				alert("6");
+				break;
+			case 7:
+				alert("7");
+				break;
+			case 8:
+				alert("8");
+				break;
+			case 9:
+				alert("9");
+				break;
+			}
+
+			alert(Number.isInteger(array));
+			var randString = "";	
+			for(var i=0; i<array.length; i++){
+				randString = randString.concat;
+				randString = array[i];
+				
+				var temp = array[i] ; 
+				
+			}
+			alert(array);
 		});
 		
 		function Hex2Bin(n){return parseInt(n,16).toString(2)} //Converts Hex to Bianary.
 
-		function hashText(str){
+		function hashText256(str){
 			var hash =  CryptoJS.SHA256(str);
-			alert(Hex2Bin(hash.toString(CryptoJS.enc.Hex)));
 			return hash.toString(CryptoJS.enc.Hex);
-			//encrypts the text given to it in Sha256 and returns it as a Bianary number.
+			//encrypts the text given to it in Sha256 and returns it.
 		}
+		function hashText512(str){
+			var hash =  CryptoJS.SHA512(str);
+			return hash.toString(CryptoJS.enc.Hex);
+			//encrypts the text given to it in Sha512 and returns it.
+		}
+
+		function hashText5(str){
+			var hash =  CryptoJS.MD5(str);	
+			return hash.toString(CryptoJS.enc.Hex);
+			//encrypts the text given to it in MD5 and returns it.
+		}
+
 	</script>
 </head>
 <body>	
