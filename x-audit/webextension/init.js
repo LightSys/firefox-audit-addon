@@ -6,4 +6,5 @@ $.ajax({
     console.log(response);
   }
 });
+dataGen("testString", "passed");
 };

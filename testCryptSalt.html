@@ -5,8 +5,15 @@
 	<script type="text/javascript" src="addon/scripts/jquery/dist/jquery.js"></script>
 	<script type="text/javascript" src="addon/scripts/crypto-js/crypto-js.js"></script>
 	<script type="text/javascript">
-		$(document).ready( function() { 
-			var configString = "testString";
+		window.onload=($(document).ready=function() { 
+			var key = "testString";
+			var message = "passed";
+			key = hashText256(key);
+			var  salt = saltGen();
+			var data = salt.concat(message);
+			console.log(salt);
+			console.log(message);
+			console.log(data);
 		});
 		
 
@@ -34,7 +41,7 @@
 				}
 			
 			}
-			var salt = hashText256(state);
+			var salt = hashText5(state);
 			return salt;
 		}
 
