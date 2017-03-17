@@ -1,5 +1,5 @@
-var CryptoJS = require("cryptojs").Crypto;
-export.dataGen = dataGen;
+var CryptoJS = require("crypto-js/crypto");
+exports.dataGen = dataGen;
 
 function dataGen(config, message) { 
 	var key = config;
