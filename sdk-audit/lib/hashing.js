@@ -1,4 +1,4 @@
-var CryptoJS = require("crypto-js/crypto");
+var CryptoJS = require("crypto-js/crypto.js");
 exports.dataGen = dataGen;
 
 function dataGen(config, message) { 
