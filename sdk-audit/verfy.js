@@ -1,3 +1,6 @@
+var system = requires("sdk/system");
+let{ Cc, Ci} = require('chrome');
+
 exports.verifyConfig = verifyConfig;
 
 //Verifies that Addons and Settings match the config file and that Firefox is up to date
@@ -8,9 +11,6 @@ function verifyConfig(config) {
 	var prefCheckResults = verifyPref(config.browser-config);
 	var isValid = prefCheckResult[0];
 	failed.prefs = preCheckResult[1];
-
-	//Check Firefox version
-	//To Be implemented
 	
 	//Check addons agaist whitelist
 	verifyAddons(config.allowed-addons, isValid, failed);
@@ -20,7 +20,6 @@ function verifyConfig(config) {
 // Checks that settings match the config file
 // Any failed settings are pased on
 function verifyPref(settings) {
-        let{ Cc, Ci } = require('chrome');
         var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
 	var failedPrefs = [];
 	var isValid = true;
@@ -75,6 +74,9 @@ function verifyAddons(whitelist, isValid, failed) {
                 }
 		failed.addons = failedAddons;
 		
+		//Check For updates
+		
+
 		inforUser(failed);	//Inform the user of settings and Addons that don't match the config
 		hashAndSend(isValid);	//Pass the result to the result of the verification to on 
 
