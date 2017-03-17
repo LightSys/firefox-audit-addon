@@ -17,35 +17,22 @@ function verifyConfig(config) {
 	
 	//Check Update
 	var build = system.build.toString();
-	var lastUpdated = {year: parseInt(build.substring(0,3)),
-				month: parseInt(build.substring(4,5)),
-				day: parseInt(build.substring(6,7))};
-	var today = new Date();
-	var diff = {year: today.getFullYear() - lastUpdated.year,
-			month: today.getMonth() - lastUpdated.month,
-			day: today.getDate() - lastUpdated.day};
-	
-	if(diff.year > 0){
-		failed.updated = false;
-		isValid = false;
+	var lastUpDated = new Date(parseInt(build.substring(0,3), parseInt(build.substring(4,5), parseInt(build.substring(6,7).time();
+	var today = Date.now();
+	var diff = today - lastUpdated;
+	var frequency = 0;
+
+	if(config.hasOwnProperty("update-freq")){
+		frequency = new Date(0, 0, config["update-freq"].time();
 	}
 	else {
-		var daysSince = diff.months * 30 + diff.days;
-
-		if(config.hasOwnProperty("update-freq")){
-			if(daysSince >= config["update-freq"]){
-				failed.updated = false;
-				isValid = false;
-			}
-		}
-		else {
-			if((diff.months * 30 + diff.days) >= 90){
-				failed.update = false;
-				isValid = false;
-			}
-		}
+		frequency = new Date(0, 0, 90).time();
 	}
-
+	
+	if(diff >= frequency){
+		isValid = false;
+		failed.updated = false;
+	}
 	console.long(lastUpdated);
 	
 	//Check addons agaist whitelist
