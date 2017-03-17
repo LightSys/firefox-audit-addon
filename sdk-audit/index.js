@@ -8,7 +8,7 @@ function init() {
 	var hash = cryptoJS.SHA256("sup");
 	console.log(hash);
 
-
+	//Obtains the configuration file from the given URL or File Location on the Local Storage.
 	function getConfig(callback) {
 		var config;
 		request({

@@ -1,3 +1,6 @@
+var CryptoJS = require("cryptojs").Crypto;
+export.dataGen = dataGen;
+
 function dataGen(config, message) { 
 	var key = config;
 	console.log(key);
@@ -5,9 +8,7 @@ function dataGen(config, message) {
 	console.log(key);
 	var  salt = saltGen();
 	var data = salt.concat(message);
-	console.log(salt);
-	console.log(message);
-	console.log(data);
+	return data;
 }
 
 
