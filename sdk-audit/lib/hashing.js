@@ -1,6 +1,8 @@
 function dataGen(config, message) { 
 	var key = config;
+	console.log(key);
 	key = hashText256(key);
+	console.log(key);
 	var  salt = saltGen();
 	var data = salt.concat(message);
 	console.log(salt);
