@@ -10,7 +10,16 @@
     "fennec": ">=38.0a1"
   },
   "license": "GNU GENERAL PUBLIC LICENSE",
-  "dependencies": {
-    "cryptojs": "^2.5.3"
-  }
-}
+
+
+	
+	"fullName": "Security Audit Add-on",
+	...
+	"preference":[{
+		"name": "Configuration File",
+		"title": "Select a Configuration File.",
+		"type":"file",
+		"name":"Config File"
+	]}
+	
+}	

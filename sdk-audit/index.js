@@ -1,10 +1,12 @@
 var self = require("sdk/self");
 var request = require("sdk/request").Request;
-var cryptoJS = require("./lib/crypto-js/crypto-js.js");
+var cryptoJS = require("cryptojs").Crypto;
 
 function init() {
 	
 	getConfig(parseConfig);
+	var hash = cryptoJS.SHA256("sup");
+	console.log(hash);
 
 
 	function getConfig(callback) {
