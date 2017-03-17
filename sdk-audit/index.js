@@ -6,7 +6,7 @@ function init() {
 	
 	getConfig(parseConfig);
 
-
+	//Obtains the configuration file from the given URL or File Location on the Local Storage.
 	function getConfig(callback) {
 		var config;
 		request({
