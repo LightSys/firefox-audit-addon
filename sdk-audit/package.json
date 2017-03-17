@@ -12,13 +12,3 @@
   "license": "GNU GENERAL PUBLIC LICENSE"
 }
 
-{
-	"fullName": "Security Audit Add-on",
-	...
-	"preference":[{
-		"name": "Configuration File",
-		"title": "Select a Configuration File.",
-		"type":"file",
-		"name":"Config File"
-	]}
-}	
