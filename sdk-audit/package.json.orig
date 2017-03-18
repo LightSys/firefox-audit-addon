@@ -1,0 +1,20 @@
+{
+  "title": "Firefox-xAudit",
+  "name": "firefox-xaudit",
+  "version": "0.0.1",
+  "description": "An addon that verifies the security of addons and certain settings",
+  "main": "index.js",
+  "author": "",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
+}
+<<<<<<< HEAD
+
+=======
+>>>>>>> 52dc693342a48d7de4c0231adee73cab45dd10db

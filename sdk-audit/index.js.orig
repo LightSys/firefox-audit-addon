@@ -2,12 +2,21 @@ let { Cc, Ci, Cu } = require('chrome');
 Cu.importGlobalProperties(['crypto']);
 var self = require("sdk/self");
 var request = require("sdk/request").Request;
+<<<<<<< HEAD
 var hashing = require("./lib/hashing.js");
+=======
+var crypto = require("lib/hashing");
+>>>>>>> 52dc693342a48d7de4c0231adee73cab45dd10db
 
 function init() {
 	
 	getConfig(parseConfig);
-	Promise.resolve(hashing.dataGen("testString", "passed")).then(function (result){console.log(result);});
+<<<<<<< HEAD
+	hashing.dataGen();
+=======
+	var hash = crypto.dataGen({hi: "sup"}, "Hello World");
+	console.log(hash);
+>>>>>>> 52dc693342a48d7de4c0231adee73cab45dd10db
 
 	//Obtains the configuration file from the given URL or File Location on the Local Storage.
 	function getConfig(callback) {
