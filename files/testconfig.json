@@ -2,7 +2,7 @@
   "whitelist": [
     {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"}'
 	{"name": "Twitch Now", "id": "jid1-jwVSihNsgAw5jA@jetpack"}'
-	{"name": "uBlock Origin", "id": "uBlock0@raymondhill.net"}'
+	{"name": "uBlock Origin", "id": "uBlock0@raymondhill.net"}
   ],
 
   "urlList": [
