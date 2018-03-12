@@ -5,7 +5,7 @@ var configUrl = null;
  * @Param theConfigUrl, the web address of the configuration file. 
  */
 function set_options(theConfigUrl){
-  chrome.storage.sync.set({"ConfigUrl": theConfigUrl}, function(){
+  browser.storage.sync.set({"ConfigUrl": theConfigUrl}, function(){
     console.log("Wrote url successfully (url: " + theConfigUrl + ")");
   });
 }
@@ -15,7 +15,7 @@ function set_options(theConfigUrl){
  * @Return done, the configuration file URL
  */
 function get_options(done){
-  chrome.storage.sync.get("ConfigUrl", function(items) {
+  browser.storage.sync.get("ConfigUrl", function(items) {
     done(items.ConfigUrl);
   });
 }

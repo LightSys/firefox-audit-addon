@@ -30,14 +30,21 @@
       "changeHeader.js"]
   },
 
+  "applications": {
+  "gecko": {
+    "id": "audit@lightsys.org",
+    "strict_min_version": "42.0"
+  }
+},
+  
   "permissions": [
 	"tabs",
-	"contentSettings",
 	"privacy",
     "management",
     "webRequest",
     "storage",
     "webRequestBlocking",
-    "https://*/*"
+    "https://*/*",
+	"browserSettings"
   ]
 }
