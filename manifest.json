@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "name": "Firefox Audit Addon",
+  "version": "1.0",
+  "description": "Audits browser addons and settings",
+
+  "icons": { "16": "icon/icon16x16.png",
+             "48": "icon/icon48x48.png",
+            "128": "icon/icon128x128.png" },
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Addon Auditor"
+  },
+
+  "options_ui" : {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+  "background": {
+    "scripts": ["/libraries/jquery-3.2.0.min.js",
+      "/libraries/cryptojs/rollups/sha256.js",
+	  "/libraries/cryptojs/rollups/hmac-sha256.js",
+	  "/libraries/cryptojs/components/enc-base64-min.js",
+	  "/libraries/cryptojs/components/enc-utf16-min.js",
+      "backgroundPage.js",
+      "changeHeader.js"]
+  },
+
+  "permissions": [
+	"tabs",
+	"contentSettings",
+	"privacy",
+    "management",
+    "webRequest",
+    "storage",
+    "webRequestBlocking",
+    "https://*/*"
+  ]
+}
