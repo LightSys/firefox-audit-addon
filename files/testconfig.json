@@ -1,11 +1,6 @@
 {
   "whitelist": [
-    {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"},
-	{"name": "Application Launcher for Drive (by Google)", "id": "lmjegmlicamnimmfhcmpkclmigmmcbeh"},
-	{"name": "Google Docs", "id": "aohghmighlieiainnegkcijnfilokake"},
-	{"name": "Grammarly for Chrome", "id": "kbfnbcaeplbcioakkpcpgfkobkghlhen"},
-	{"name": "Google Docs Offline", "id": "ghbmnnjooekpmoecnnnilnnbdlolhkhi"},
-	{"name": "Google Slides", "id": "aapocclcgogkmnckokdopfmhonfmgoek"}
+    {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"}
   ],
 
   "urlList": [
