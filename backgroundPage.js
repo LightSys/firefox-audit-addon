@@ -101,7 +101,7 @@ function auditFailed(badAddons, suppressAlert){
     path: "icon/fail-icon48x48.png"
   });
   if(!suppressAlert){
-    alert("These addons are not in the whitelist: \n"
+    console.log("These addons are not in the whitelist: \n"
       + badAddons.join("\n")
       + "\n\nPlease uninstall or disable these addons and restart Chrome before continuing.");
   }
