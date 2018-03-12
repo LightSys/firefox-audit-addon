@@ -89,7 +89,7 @@ function auditPassed(suppressAlert){
     path: "icon/icon48x48.png"
   });
   if(!suppressAlert){
-    alert("Audit Completed Successfully!");
+    window.alert("Audit Completed Successfully!");
   }
   passAudit = true;
   set_badAddons(badAddons=null);
@@ -101,7 +101,7 @@ function auditFailed(badAddons, suppressAlert){
     path: "icon/fail-icon48x48.png"
   });
   if(!suppressAlert){
-    alert("These addons are not in the whitelist: \n"
+    window.alert("These addons are not in the whitelist: \n"
       + badAddons.join("\n")
       + "\n\nPlease uninstall or disable these addons and restart Chrome before continuing.");
   }
