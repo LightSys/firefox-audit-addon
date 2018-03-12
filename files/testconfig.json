@@ -1,13 +1,11 @@
 {
   "whitelist": [
-    {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"}
+    {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"}'
+	{"name": "Twitch Now", "id": "jid1-jwVSihNsgAw5jA@jetpack"}'
+	{"name": "uBlock Origin", "id": "uBlock0@raymondhill.net"}'
   ],
 
   "urlList": [
-    {"url": "https://www.google.com/"},
-    {"url": "https://www.microsoft.com/"},
-    {"url": "https://www.microsoft.com/en-us/"},
-    {"url": "https://www.apple.com/"},
-    {"url": "10.5.128.71"}
+    
   ]
 }
