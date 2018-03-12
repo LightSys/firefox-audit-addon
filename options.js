@@ -1,7 +1,7 @@
 var configUrl = null;
 
 /**
- * Stores the add-on options to Chrome's persistent storage.
+ * Stores the add-on options to Firefox's persistent storage.
  * @Param theConfigUrl, the web address of the configuration file. 
  */
 function set_options(theConfigUrl){
@@ -11,7 +11,7 @@ function set_options(theConfigUrl){
 }
 
 /**
- * Gets the add-on options from Chrome's persistent storage.
+ * Gets the add-on options from Firefox's persistent storage.
  * @Return done, the configuration file URL
  */
 function get_options(done){
