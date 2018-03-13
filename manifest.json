@@ -27,8 +27,7 @@
 	  "/libraries/cryptojs/components/enc-base64-min.js",
 	  "/libraries/cryptojs/components/enc-utf16-min.js",
       "backgroundPage.js",
-      "changeHeader.js",
-	  "getUrlEntered.js"]
+      "changeHeader.js"]
   },
 
   "applications": {
