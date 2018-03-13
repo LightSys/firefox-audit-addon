@@ -8,6 +8,6 @@ var doneGot;
 browser.webNavigation.onBeforeNavigate.addListener(listened => {
 	doneGot = listened.url;
 	
-	//
+	
 });
 	
