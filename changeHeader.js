@@ -37,6 +37,7 @@ getConfigUrl(function(configUrl){
   .done(function(json) {
 	  //parses file and a store in variable, then stringifies and stores.
     var parsed = JSON.parse(json);
+	var allowedUrlList = JSON.stringify(parsed.urlList);
 	var stringifiedConfig = JSON.stringify(parsed.whitelist);
 	var auditMessage = null;
 	var saltPrng = null;
@@ -46,7 +47,18 @@ getConfigUrl(function(configUrl){
 	var prng = new Uint32Array(1);
 	passAudit = false;
 	
+	var listened;
+	var doneGot;
+
+	browser.webNavigation.onBeforeNavigate.addListener(listened => {
+		doneGot = listened.url;
+	
+	});
+	
+	
 	console.log("StringifiedConfig: " + stringifiedConfig);
+	
+	console.log("AllowedUrls: " + allowedUrlList);
 	
 	console.log("Audit Status: " + passAudit);
 	
