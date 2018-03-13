@@ -87,9 +87,17 @@ getConfigUrl(function(configUrl){
 		console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
 		console.log("X-Audit: " + xAudit);
 		
-		/*$.post('http://10.5.128.71', 'xAudit', function(status) {
-			alert("Status: " + status);
-		});*/
+		if(auditMessage === "Passed"){
+			$.post('http://10.5.128.71', 'xAudit', function(status) {
+				console.log("Status: " + status);
+			})
+		}
+		else if(auditMessage === "Failed"){
+			
+		}
+		else if(auditMessage === "Unknown"){
+			
+		}
 	});
  })
   .fail(function(error) {

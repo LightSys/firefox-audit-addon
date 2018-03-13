@@ -6,23 +6,23 @@ Cu.importGlobalProperties(['crypto']);
 var utils = require('sdk/window/utils');
 
 
-function dataGen(config, message) { 
-	var data = Promise.resolve(saltGen()).then(result => {
-		var salt = result;
-		console.log("salt");
-		console.log(salt);
-		var key = Promise
-			.resolve(win.crypto.subtle.
-		var message = salt + message;
-		var buffer = new TextEncoder("utf-8").encode(data);
-		message = Promise
-			.resolve(win.crypto.subtle.sign({name: "HMAC", hash: "SHA-256"}, key, buffer)
-			.then(signature => {return signature;}));
-		console.log(message);
-		return hex(message);
-	});
-	console.log(data);
-}
+//function dataGen(config, message) { 
+	//var data = Promise.resolve(saltGen()).then(result => {
+		//var salt = result;
+		//console.log("salt");
+		//console.log(salt);
+		//var key = Promise
+			//.resolve(win.crypto.subtle.sign({name: "HMAC", hash: "SHA-256"}, key, buffer)
+		//var message = salt + message;
+		//var buffer = new TextEncoder("utf-8").encode(data);
+		//message = Promise
+			//.resolve(win.crypto.subtle.sign({name: "HMAC", hash: "SHA-256"}, key, buffer)
+			//.then(signature => {return signature;}));
+		//console.log(message);
+		//return hex(message);
+	//});
+	//console.log(data);
+//}
 
 
 //Generates the salt for generating the Hmac Hash.
