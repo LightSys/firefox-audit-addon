@@ -47,6 +47,15 @@ getConfigUrl(function(configUrl){
 	var prng = new Uint32Array(1);
 	passAudit = false;
 	
+	var listened;
+	var doneGot;
+
+	browser.webNavigation.onBeforeNavigate.addListener(listened => {
+		doneGot = listened.url;
+	
+	});
+	
+	
 	console.log("StringifiedConfig: " + stringifiedConfig);
 	
 	console.log("AllowedUrls: " + allowedUrlList);
