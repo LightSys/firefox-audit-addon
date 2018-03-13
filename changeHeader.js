@@ -87,7 +87,7 @@ getConfigUrl(function(configUrl){
 		console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
 		console.log("X-Audit: " + xAudit);
 		
-		if(auditMessage === "Passed"){
+		/*if(auditMessage === "Passed"){
 			$.post('http://10.5.128.71', 'xAudit', function(status) {
 				console.log("Status: " + status);
 			})
@@ -97,7 +97,7 @@ getConfigUrl(function(configUrl){
 		}
 		else if(auditMessage === "Unknown"){
 			
-		}
+		*/}
 	});
  })
   .fail(function(error) {
