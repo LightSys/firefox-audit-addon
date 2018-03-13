@@ -69,7 +69,7 @@ getConfigUrl(function(configUrl){
 	
 	//Use SHA256 to turn the configuration file into a key"
 	var hashKey = CryptoJS.SHA256(stringifiedConfig);
-	console.log("Hash Key: " + hashKey+ "\nShow Message: " + auditMessage);
+	console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
 	
 	saltPrng = window.crypto.getRandomValues(prng);
 	
