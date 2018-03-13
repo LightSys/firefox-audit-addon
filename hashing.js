@@ -12,7 +12,7 @@ function dataGen(config, message) {
 		console.log("salt");
 		console.log(salt);
 		var key = Promise
-			.resolve(win.crypto.subtle.
+			.resolve(win.crypto.subtle.sign({name: "HMAC", hash: "SHA-256"}, key, buffer)
 		var message = salt + message;
 		var buffer = new TextEncoder("utf-8").encode(data);
 		message = Promise
