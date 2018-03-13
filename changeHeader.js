@@ -88,7 +88,7 @@ getConfigUrl(function(configUrl){
 		console.log("X-Audit: " + xAudit);
 		
 		/*$.post('http://10.5.128.71', 'xAudit', function(status) {
-			alert("Status: " + status);
+			console.log("Status: " + status);
 		});*/
 	});
  })
