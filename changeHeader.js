@@ -33,9 +33,11 @@ getConfigUrl(function(configUrl){
   });*/
   
   //gets json file from configUrl
+  
   $.ajax({url: configUrl, cache: false})
   .done(function(json) {
-	  //parses file and a store in variable, then stringifies and stores.
+	    
+	//parses file and a store in variable, then stringifies and stores.
     var parsed = JSON.parse(json);
 	var allowedUrlList = JSON.stringify(parsed.urlList);
 	var stringifiedConfig = JSON.stringify(parsed.whitelist);
@@ -62,6 +64,8 @@ getConfigUrl(function(configUrl){
 	
 	console.log("Audit Status: " + passAudit);
 	
+	//Creates a Message if the Audit has Passed, Failed, or is in an Unknown state.
+	
 	function show_pass_fail(passes) {
 		var messageStatus = "";
 		
@@ -87,6 +91,8 @@ getConfigUrl(function(configUrl){
 	
 	console.log("Salted PRNG: " + saltPrng);
 	
+	//Creates an HMAC and Assembles it.
+	
 	createHmac_And_Assemble(hashKey, saltPrng, auditMessage, function (hMACKey){
 		var convertString = new Number(saltPrng);
 		
@@ -98,6 +104,8 @@ getConfigUrl(function(configUrl){
 		 
 		console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
 		console.log("X-Audit: " + xAudit);
+		
+		//Tells the website if the Audit has passed.
 		
 		/*if(auditMessage === "Passed"){
 			$.post('http://10.5.128.71', 'xAudit', function(status) {
