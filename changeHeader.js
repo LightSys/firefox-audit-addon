@@ -109,7 +109,7 @@ getConfigUrl(function(configUrl){
 		}
 		else if(auditMessage === "Unknown"){
 			
-		*/}
+		}*/
 	});
  })
   .fail(function(error) {
