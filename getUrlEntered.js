@@ -12,8 +12,12 @@ var doneGot;
 browser.webNavigation.onBeforeNavigate.addListener(listened => {
 	doneGot = listened.url;
 	
+	//hash URL and then send it to be compared to list
+	
+	//URL is hashed
+	
+	//URL is sent to be compared to list
 	
 	
-	//
 });
 	
