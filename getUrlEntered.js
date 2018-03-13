@@ -8,8 +8,6 @@ var doneGot;
 browser.webNavigation.onBeforeNavigate.addListener(listened => {
 	doneGot = listened.url;
 	
-	console.log(doneGot);
+	//
 });
-
-//function callHash(entered) {
 	
