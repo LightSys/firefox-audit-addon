@@ -27,7 +27,7 @@ chrome.runtime.onInstalled.addListener(function() {
   getAndCheckConfig(suppressAlert = false);
 });	
 
-// This runs on Chrome startup
+// This runs on Firefox startup
 chrome.runtime.onStartup.addListener(function() {
   getAndCheckConfig(suppressAlert = true);
 });
@@ -136,7 +136,7 @@ function compareExtensions(whitelistIds, installedExtensions, done) {
 * @Return done, when finished, returns a list of enabled extensions.
 */
 function getInstalledExtensions(done) {
-  // This gets all Chrome extensions and apps
+  // This gets all Firefox extensions and apps
   chrome.management.getAll(function(items){
     var installedExtensions = new Array();
     items.forEach(function(item){
@@ -181,7 +181,7 @@ function getAndCheckConfig(suppressAlert = false) {
 }
 
 /**
-* Gets the add-on options from Chrome's persistent storage.
+* Gets the add-on options from Firefox's persistent storage.
 * @Return done, the configuration file URL
 */
 function get_options(done){
@@ -189,6 +189,8 @@ function get_options(done){
     done(items.ConfigUrl);
   });
 }
+
+//Gets the URL of the Configuration File from the User.
 
 function getConfigUrl(done) {
   get_options(function(configUrl) {
