@@ -123,6 +123,8 @@ browser.webNavigation.onBeforeNavigate.addListener(listened => {
         })
 })
 
+//Function for creating the HMAC Salted Encryption.
+
 function createHmac_And_Assemble(key, salt, message, done) {
     var saltedMessage = salt + message;
     var hMAC = CryptoJS.HmacSHA256(saltedMessage, key).toString();
