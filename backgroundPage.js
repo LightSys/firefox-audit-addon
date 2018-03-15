@@ -55,7 +55,7 @@ function checkConfigFile(configUrl, suppressAlert) {
         .done(function (json) {
             console.log(json);
             var parsedJson = JSON.parse(json);
-            var getting = distribution.iniFile.exists.appversion.get({});
+
 
             //This obtains all of the installed extensions which are sent as a callback.
             getInstalledExtensions(function (installedExtensions) {
@@ -213,12 +213,5 @@ function get_badAddons(done) {
 function get_passAudit(done) {
     chrome.storage.sync.get("passAudit", function (items) {
         done(items.PassAudit);
-    });
-}
-
-function getVersion(getting) {
-    getting.then((got) => {
-        console.log('Value: ${got.value}');
-        console.log('Control: ${got.levelOfControl}');
     });
 }

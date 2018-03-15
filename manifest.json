@@ -39,7 +39,7 @@
     "strict_min_version": "42.0"
   }
 },
-  
+
   "permissions": [
 	"tabs",
 	"privacy",
