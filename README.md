@@ -26,16 +26,16 @@ _Note: The url for the configuration file should not exceed 1,000 characters. If
 Documentation for specific files can be found in the `doc` directory. Below are links to the documentation for each of the files.
 
 **Firefox-Audit-Addon**  
--- [css/popup.css](https://github.com/LightSys/firefox-audit-addon/master/doc/css/popup.css.md)  
--- [files/testconfig.json](https://github.com/LightSys/firefox-audit-addon/master/doc/files/testconfig.json.md)  
--- [libraries/jquery-3.2.0.min.js](https://github.com/LightSys/firefox-audit-addon/master/doc/libraries/jquery-3.2.0.min.js.md)  
--- [changeHeader.js](https://github.com/LightSys/firefox-audit-addon/master/doc/changeHeader.js.md)  
--- [backgroundPage.js](https://github.com/LightSys/firefox-audit-addon/master/doc/backgroundPage.js.md)  
--- [options.html](https://github.com/LightSys/firefox-audit-addon/master/doc/options.html.md)  
--- [options.js](https://github.com/LightSys/firefox-audit-addon/master/doc/options.js.md)  
--- [manifest.json](https://github.com/LightSys/firefox-audit-addon/master/doc/manifest.json.md)  
--- [popup.html](https://github.com/LightSys/firefox-audit-addon/master/doc/popup.html.md)  
--- [popup.js](https://github.com/LightSys/firefox-audit-addon/master/doc/popup.js.md)  
+-- [css/popup.css](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/css/popup.css.md)  
+-- [files/testconfig.json](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/files/testconfig.json.md)  
+-- [libraries/jquery-3.2.0.min.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/libraries/jquery-3.2.0.min.js.md)  
+-- [changeHeader.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/changeHeader.js.md)  
+-- [backgroundPage.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/backgroundPage.js.md)  
+-- [options.html](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/options.html.md)  
+-- [options.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/options.js.md)  
+-- [manifest.json](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/manifest.json.md)  
+-- [popup.html](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/popup.html.md)  
+-- [popup.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/popup.js.md)  
 
 ---
 
