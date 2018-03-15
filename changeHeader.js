@@ -67,7 +67,7 @@ function changeHeader(configUrl, visitedUrl) {
         .done(function (json) {
             //parses file and a store in variable, then stringifies and stores.
             var parsed = JSON.parse(json);
-
+            var stringifiedConfig = JSON.stringify(parsed.whitelist);
             var auditMessage = null;
             var saltPrng = null;
             var trimmedHmac = null;
@@ -97,7 +97,7 @@ function changeHeader(configUrl, visitedUrl) {
             auditMessage = show_pass_fail(passAudit);
 
             //Use SHA256 to turn the configuration file into a key"
-            var hashKey = CryptoJS.SHA256(configUrl);
+            var hashKey = CryptoJS.SHA256(stringifiedConfig);
             console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
 
             saltPrng = window.crypto.getRandomValues(prng);
@@ -119,8 +119,8 @@ function changeHeader(configUrl, visitedUrl) {
                 console.log("X-Audit: " + xAudit);
 
                 //Tells the website if the Audit has passed.
-                /*if (auditMessage === "Passed") {
-                    $.post(visitedUrl, 'xAudit', function (status) {
+                if (auditMessage === "Passed") {
+                    $.post(visitedUrl, xAudit, function (status) {
                         console.log("Status: " + status);
                     })
                 }
@@ -130,7 +130,7 @@ function changeHeader(configUrl, visitedUrl) {
                 }
                 else if (auditMessage === "Unknown") {
 
-                }*/
+                }
             });
         })
         .fail(function (error) {
