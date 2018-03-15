@@ -6,21 +6,22 @@
 var bg = chrome.extension.getBackgroundPage();
 var passAudit = bg.passAudit;
 show_pass_fail(passAudit);
+
 // show_list(passAudit);
 
 function show_pass_fail(passes) {
-	if (passes != null) {
-		if (passes) {
-			$("#passFailLabel").text("Audit Passed");
-			$("#popupIcon").prepend("<img align='center' src='icon/icon128x128.png'>");
-		} else {
-			$("#passFailLabel").text("Audit Failed");
-			$("#popupIcon").prepend("<img align='center' src='icon/fail-icon128x128.png'>");
-		}
-	} else {
-		$("#passFailLabel").text("Unknown Audit Result");
-		$("#popupIcon").prepend("<img align='center' src='icon/icon128x128.png'>");
-	}
+    if (passes != null) {
+        if (passes) {
+            $("#passFailLabel").text("Audit Passed");
+            $("#popupIcon").prepend("<img align='center' src='icon/icon128x128.png'>");
+        } else {
+            $("#passFailLabel").text("Audit Failed");
+            $("#popupIcon").prepend("<img align='center' src='icon/fail-icon128x128.png'>");
+        }
+    } else {
+        $("#passFailLabel").text("Unknown Audit Result");
+        $("#popupIcon").prepend("<img align='center' src='icon/icon128x128.png'>");
+    }
 }
 
 // function show_list(passes){
@@ -33,15 +34,15 @@ function show_pass_fail(passes) {
 * Triggered by clicking the "Run Audit" button in the popup, this runs an audit, 
 * and notifies the user of any failures.
 */
-function run_audit(){
-	bg.getAndCheckConfig(suppressAlert=false);
+function run_audit() {
+    bg.getAndCheckConfig(suppressAlert = false);
 }
 
 /**
  * Close the window
  */
-function close_window(){
-  window.close();
+function close_window() {
+    window.close();
 }
 
 // function list_BadAddons(){
