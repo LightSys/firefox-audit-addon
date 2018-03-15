@@ -61,6 +61,18 @@ This sets the security policy to allow `eval()` and its relatives, like `setTime
 
 This section of the file specifies scripts to run. When these scripts are run is specified in the scripts themselves, but if left unspecified, they are to run continuously. 
 
+
+```json
+	"applications": {
+	"gecko": {
+		"id": "audit@lightsys.org",
+		"strict_min_version": "42.0"
+  }
+},
+```
+
+This section defines the permanent ID of the extension so that it can be included on the whitelist for approved extensions
+
 ```json 
   "permissions": [
 	"tabs",
