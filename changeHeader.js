@@ -74,7 +74,6 @@ function changeHeader(configUrl, visitedUrl) {
             var hexSalt = null;
             var xAudit = "";
             var prng = new Uint32Array(1);
-            passAudit = false;
 
             console.log("Audit Status: " + passAudit);
 
