@@ -90,6 +90,9 @@ This section defines the permanent ID of the extension so that it can be include
 
 This requests the `"management"` permission from Chrome, which allows the add-on access to the `chrome.management` API.
 
+The `"privacy"` permission allows access and the ability to modify privacy-related browser settings.
+We will be looking into the implementation of this in the Firefox side of things.
+
 The `"tabs"` permission allows the ability to get a list of opened tabs, filtered by various criteria, and to open, update, move, reload, and remove tabs.
 We are currently unsure as to whether this permission is still doing anything for us, as it is a port from the Chrome version, but we're going to keep it in here until we have time to test it.
 
