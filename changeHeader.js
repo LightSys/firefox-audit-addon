@@ -37,6 +37,7 @@ function createListener(configUrl, allowedUrls) {
         var doneGot = listened.url;
 
         console.log("Allowed Urls: " + allowedUrls);
+        console.log(doneGot);
 
         //For now, just comparing plain text strings until hashed urls in config are available
         if (allowedUrls.indexOf(doneGot) !== -1) {
