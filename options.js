@@ -20,16 +20,15 @@ function get_options(done){
   });
 }
 
-/*
- * Close the window
- */
+//Close the window.
+
 function close_window(){
   window.close();
 }
 
-/*
- * Sets the options text box to the contain the current configuration URL
- */
+
+//Sets the options text box to the contain the current configuration URL.
+ 
 function get() {
   get_options(function(theConfigUrl) {
     configUrl = theConfigUrl;
@@ -37,9 +36,8 @@ function get() {
   });
 }
 
-/*
- * Take the URL from the text box and set the configuration URL to that
- */
+//Take the URL from the text box and set the configuration URL to that.
+
 function set() {
   set_options(document.getElementById('urlText').value);
 }

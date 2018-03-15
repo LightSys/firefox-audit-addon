@@ -58,17 +58,17 @@ function checkConfigFile(configUrl, suppressAlert) {
 	console.log(json);
     var parsedJson = JSON.parse(json);
 	
-    // this gets all the installed extensions. They are sent as a callback.
+    //This obtains all of the installed extensions which are sent as a callback.
     getInstalledExtensions(function(installedExtensions) {
 
-      //create array to store IDs in
+      //Create array to store IDs in
       var whitelistIds = new Array();
 
-      // get each json object, store its ID in the array.
+      //Get each json object, store its ID in the array.
       for (var obj in parsedJson.whitelist) {
         whitelistIds.push(parsedJson.whitelist[obj].id);
       }
-      // compare the extensions, and get a list of bad addons (not whitelisted) back
+      //Compare the list of installed extensions. Then obtain a list of not whitelisted extensions back.
       compareExtensions(whitelistIds, installedExtensions,
         function(badAddons) {
         if(badAddons.length > 0) {
@@ -84,6 +84,8 @@ function checkConfigFile(configUrl, suppressAlert) {
   });
 }
 
+//Changes the icon on the toolbar to blue if the Audit Passes.
+
 function auditPassed(suppressAlert){
   chrome.browserAction.setIcon({
     path: "icon/icon48x48.png"
@@ -95,8 +97,9 @@ function auditPassed(suppressAlert){
   set_badAddons(badAddons=null);
 }
 
+//Changes the icon on the toolbar to red if the Audit Fails.
+
 function auditFailed(badAddons, suppressAlert){
-  // set icon to fail
   chrome.browserAction.setIcon({
     path: "icon/fail-icon48x48.png"
   });

@@ -1,13 +1,13 @@
 ## About `manifest.json`
 
-The `manifest.json` file is a file that the Chrome browser reads to obtain important information about the add-on. Below is a line-by-line explanation of what exactly this file does.
+The `manifest.json` file is a file that the Firefox browser reads to obtain important information about the add-on. Below is a line-by-line explanation of what exactly this file does.
 
 ```json
 {
   "manifest_version": 2,
-  "name": "Chrome Audit Addon",
+  "name": "Firefox Audit Addon",
   "version": "1.0",
-  "description": "Audits browser addons and settings",
+  "description": "Audits browser addons and informs certain websites of audit status",
 ```
 
 These fields are basic information about the add-on. The only one that may seem a little confusing is the `manifest_version` field, which describes the format of this file.
@@ -35,11 +35,11 @@ There is also the option to add a `"default_icon"` field, but if it is left unsp
 ```json
   "options_ui" : {
     "page": "options.html",
-    "chrome_style": true
+    "chrome_style": false
   },
 ```
 
-Sets the options page html file, and that it is in "Chrome style." 
+Sets the options page html file, and that it is not in "Chrome style." 
 
 ```json
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
@@ -49,19 +49,41 @@ This sets the security policy to allow `eval()` and its relatives, like `setTime
 
 ```json
   "background": {
-    "scripts": ["libraries/jquery-3.2.0.min.js", "backgroundPage.js", "changeHeader.js"]
+    "scripts": ["/libraries/jquery-3.2.0.min.js",
+      "/libraries/cryptojs/rollups/sha256.js",
+	  "/libraries/cryptojs/rollups/hmac-sha256.js",
+	  "/libraries/cryptojs/components/enc-base64-min.js",
+	  "/libraries/cryptojs/components/enc-utf16-min.js",
+      "backgroundPage.js",
+      "changeHeader.js"]
   },
 ```
 
 This section of the file specifies scripts to run. When these scripts are run is specified in the scripts themselves, but if left unspecified, they are to run continuously. 
 
+
+```json
+	"applications": {
+	"gecko": {
+		"id": "audit@lightsys.org",
+		"strict_min_version": "42.0"
+  }
+},
+```
+
+This section defines the permanent ID of the extension so that it can be included on the whitelist for approved extensions
+
 ```json 
   "permissions": [
+	"tabs",
+	"privacy",
     "management",
     "webRequest",
     "storage",
     "webRequestBlocking",
-    "<all_urls>"
+    "https://*/*",
+	"browserSettings",
+	"webNavigation"
   ]
 }
 ```
