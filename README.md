@@ -1,21 +1,21 @@
 <img align="right" src="https://raw.githubusercontent.com/LightSys/chrome-audit-addon/master/icon/icon128x128.png">
 
 
-# Security Audit Add-on for Chrome
+# Security Audit Add-on for Firefox
 
 ### Introduction
 
-Many organizations struggle with security risks created by users installing risky add-ons to browsers. This is especially true in bring-your-own-device environments or work-from-home environments. This project is a Chrome browser add-on to audit the browser's security. 
+Many organizations struggle with security risks created by users installing risky add-ons to browsers. This is especially true in bring-your-own-device environments or work-from-home environments. This project is a Firefox browser add-on to audit the browser's security. 
 
 Languages: JavaScript, JSON, JQuery, HTML, and CSS.
 
 ### Detailed Description
 
-The goal of this project would be to create a Chrome add-on which verifies that the browser's security configuration is acceptable and only allows sign-in to secured areas if the configuration meets requirements. Missions organizations are often exposed far more than other organizations to browser security lapses, since missionaries often use their own personally-owned laptops and devices, and often from outside of a carefully controlled office network. These lapses in security can cause a loss of confidential information as well as expose field missionaries to "association/correlation" issues which can result in additional scrutiny from governments and activist groups.
+The goal of this project would be to create a Firefox add-on which verifies that the browser's security configuration is acceptable and only allows sign-in to secured areas if the configuration meets requirements. Missions organizations are often exposed far more than other organizations to browser security lapses, since missionaries often use their own personally-owned laptops and devices, and often from outside of a carefully controlled office network. These lapses in security can cause a loss of confidential information as well as expose field missionaries to "association/correlation" issues which can result in additional scrutiny from governments and activist groups.
 
 ### Administrating for the Audit Add-on
 
-Administrators asking users to use the add-on with their websites should provide their users with a custom configuration file's URL. We've hosted [an example file](https://raw.githubusercontent.com/LightSys/chrome-audit-addon/master/files/testconfig.json), but recommend that administrators edit this to fulfill their needs. See the [page on writing the configuration file](https://github.com/LightSys/chrome-audit-addon/tree/master/doc/writing_config.md) for details on how to write a custom configuration file.
+Administrators asking users to use the add-on with their websites should provide their users with a custom configuration file's URL. We've hosted [an example file](https://raw.githubusercontent.com/LightSys/firefox-audit-addon/master/files/testconfig.json), but recommend that administrators edit this to fulfill their needs. See the [page on writing the configuration file](https://github.com/LightSys/firefox-audit-addon/tree/master/doc/writing_config.md) for details on how to write a custom configuration file.
 
 _Note: The url for the configuration file should not exceed 1,000 characters. If it does, the add-on may not function correctly._
 
@@ -25,17 +25,17 @@ _Note: The url for the configuration file should not exceed 1,000 characters. If
 
 Documentation for specific files can be found in the `doc` directory. Below are links to the documentation for each of the files.
 
-**Chrome-Audit-Addon**  
--- [css/popup.css](https://github.com/LightSys/chrome-audit-addon/tree/master/doc/css/popup.css.md)  
--- [files/testconfig.json](https://github.com/LightSys/chrome-audit-addon/tree/master/doc/files/testconfig.json.md)  
--- [libraries/jquery-3.2.0.min.js](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/libraries/jquery-3.2.0.min.js.md)  
--- [changeHeader.js](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/changeHeader.js.md)  
--- [backgroundPage.js](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/backgroundPage.js.md)  
--- [options.html](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/options.html.md)  
--- [options.js](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/options.js.md)  
--- [manifest.json](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/manifest.json.md)  
--- [popup.html](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/popup.html.md)  
--- [popup.js](https://github.com/LightSys/chrome-audit-addon/blob/master/doc/popup.js.md)  
+**Firefox-Audit-Addon**  
+-- [css/popup.css](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/css/popup.css.md)  
+-- [files/testconfig.json](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/files/testconfig.json.md)  
+-- [libraries/jquery-3.2.0.min.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/libraries/jquery-3.2.0.min.js.md)  
+-- [changeHeader.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/changeHeader.js.md)  
+-- [backgroundPage.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/backgroundPage.js.md)  
+-- [options.html](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/options.html.md)  
+-- [options.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/options.js.md)  
+-- [manifest.json](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/manifest.json.md)  
+-- [popup.html](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/popup.html.md)  
+-- [popup.js](https://github.com/LightSys/firefox-audit-addon/blob/master/doc/popup.js.md)  
 
 ---
 
