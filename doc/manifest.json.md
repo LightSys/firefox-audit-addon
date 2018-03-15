@@ -90,7 +90,16 @@ This section defines the permanent ID of the extension so that it can be include
 
 This requests the `"management"` permission from Chrome, which allows the add-on access to the `chrome.management` API.
 
+The `"tabs"` permission allows the ability to get a list of opened tabs, filtered by various criteria, and to open, update, move, reload, and remove tabs.
+We are currently unsure as to whether this permission is still doing anything for us, as it is a port from the Chrome version, but we're going to keep it in here until we have time to test it.
+
 It also requests for `"webRequest"`, `"webRequestBlocking"`, and `"<all_urls>"` to make the required changes to headers when visiting secure sites.
+
+`"https://*/*"` is requesting permissions to access any https website and any of their extensions as well.
+
+The `"browserSettings"` permission enables our extension to modify certain global browser settings.
+
+The `"webNavigation"` permission is allowing us to pull the URL from the browser before the user navigates to a location.
 
 Finally, `"storage"` requests for persistent storage, a place to maintain a consistent configuration file URL between Chrome sessions. 
 
