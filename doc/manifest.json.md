@@ -35,11 +35,11 @@ There is also the option to add a `"default_icon"` field, but if it is left unsp
 ```json
   "options_ui" : {
     "page": "options.html",
-    "chrome_style": true
+    "chrome_style": false
   },
 ```
 
-Sets the options page html file, and that it is in "Chrome style." 
+Sets the options page html file, and that it is not in "Chrome style." 
 
 ```json
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
@@ -49,7 +49,13 @@ This sets the security policy to allow `eval()` and its relatives, like `setTime
 
 ```json
   "background": {
-    "scripts": ["libraries/jquery-3.2.0.min.js", "backgroundPage.js", "changeHeader.js"]
+    "scripts": ["/libraries/jquery-3.2.0.min.js",
+      "/libraries/cryptojs/rollups/sha256.js",
+	  "/libraries/cryptojs/rollups/hmac-sha256.js",
+	  "/libraries/cryptojs/components/enc-base64-min.js",
+	  "/libraries/cryptojs/components/enc-utf16-min.js",
+      "backgroundPage.js",
+      "changeHeader.js"]
   },
 ```
 
@@ -57,11 +63,15 @@ This section of the file specifies scripts to run. When these scripts are run is
 
 ```json 
   "permissions": [
+	"tabs",
+	"privacy",
     "management",
     "webRequest",
     "storage",
     "webRequestBlocking",
-    "<all_urls>"
+    "https://*/*",
+	"browserSettings",
+	"webNavigation"
   ]
 }
 ```
