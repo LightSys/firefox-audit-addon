@@ -1,13 +1,13 @@
 ## About `manifest.json`
 
-The `manifest.json` file is a file that the Chrome browser reads to obtain important information about the add-on. Below is a line-by-line explanation of what exactly this file does.
+The `manifest.json` file is a file that the Firefox browser reads to obtain important information about the add-on. Below is a line-by-line explanation of what exactly this file does.
 
 ```json
 {
   "manifest_version": 2,
-  "name": "Chrome Audit Addon",
+  "name": "Firefox Audit Addon",
   "version": "1.0",
-  "description": "Audits browser addons and settings",
+  "description": "Audits browser addons and informs certain websites of audit status",
 ```
 
 These fields are basic information about the add-on. The only one that may seem a little confusing is the `manifest_version` field, which describes the format of this file.

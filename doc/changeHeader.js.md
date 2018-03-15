@@ -1,6 +1,6 @@
  ## About `changeHeader.js`
 
-This file adds and extra HTTP header to requests when visiting secure websites, with the information of whether or not the browser passed the security audit. 
+This file adds an extra HTTP header to requests when visiting secure websites, with the information of whether or not the browser passed the security audit. 
 
 #### Detailed Description (for developers)
 
