@@ -19,113 +19,120 @@
 * 6. Send the X-Audit to the host server (I am getting the error "No Access-Control-Allow-Origin").
 *
 */
-
-browser.webNavigation.onBeforeNavigate.addListener(listened => {
-    var doneGot = listened.url;
-
+getConfigUrl(function (configUrl) {
     //gets json file from configUrl
     $.ajax({url: configUrl, cache: false})
         .done(function (json) {
             var parsed = JSON.parse(json);
             var allowedUrlList = JSON.stringify(parsed.urlList);
-
-            //For now, just comparing plain text strings until hashed urls in config are available
-            if (allowedUrlList.indexOf(doneGot) !== -1) {
-                // get the json file and X-Audit header
-                getConfigUrl(function (configUrl) {
-
-                    //Checks if there is anything in the configUrl
-                    console.log("Result: " + configUrl);
-
-                    //gets json file from configUrl
-                    $.ajax({url: configUrl, cache: false})
-                        .done(function (json) {
-                            //parses file and a store in variable, then stringifies and stores.
-                            var parsed = JSON.parse(json);
-
-                            var auditMessage = null;
-                            var saltPrng = null;
-                            var trimmedHmac = null;
-                            var hexSalt = null;
-                            var xAudit = "";
-                            var prng = new Uint32Array(1);
-                            passAudit = false;
-
-
-                            console.log("AllowedUrls: " + allowedUrlList);
-
-                            console.log("Audit Status: " + passAudit);
-
-                            //Creates a Message if the Audit has Passed, Failed, or is in an Unknown state.
-
-                            function show_pass_fail(passes) {
-                                var messageStatus = "";
-
-                                if (passes != null) {
-                                    if (passes) {
-                                        messageStatus = "Passed";
-                                    } else {
-                                        messageStatus = "Failed";
-                                    }
-                                } else {
-                                    messageStatus = "Unknown";
-                                }
-                                return messageStatus;
-                            }
-
-                            auditMessage = show_pass_fail(passAudit);
-
-                            //Use SHA256 to turn the configuration file into a key"
-                            var hashKey = CryptoJS.SHA256(allowedUrlList);
-                            console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
-
-                            saltPrng = window.crypto.getRandomValues(prng);
-
-                            console.log("Salted PRNG: " + saltPrng);
-
-                            //Creates an HMAC and Assembles it.
-
-                            createHmac_And_Assemble(hashKey, saltPrng, auditMessage, function (hMACKey) {
-                                var convertString = new Number(saltPrng);
-
-                                hmacLength = hMACKey.length - 16;
-                                trimmedHmac = hMACKey.substring(0, hmacLength);
-                                hexSalt = (convertString).toString(16).toUpperCase();
-
-                                xAudit = auditMessage + " " + hexSalt + trimmedHmac;
-
-                                console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
-                                console.log("X-Audit: " + xAudit);
-
-                                //Tells the website if the Audit has passed.
-                                /*if (auditMessage === "Passed") {
-                                    $.post(doneGot, 'xAudit', function (status) {
-                                        console.log("Status: " + status);
-                                    })
-                                }
-                                else if (auditMessage === "Failed") {
-                                    console.log("Status: " + status);
-
-                                }
-                                else if (auditMessage === "Unknown") {
-
-                                }*/
-                            });
-                        })
-                        .fail(function (error) {
-                            console.log(error);
-                        });
-                });
-            }
+            createListener(configUrl, allowedUrlList);
         })
         .fail(function (error) {
             console.log(error);
         })
-})
+});
+
+function createListener(configUrl, allowedUrls) {
+    browser.webNavigation.onBeforeNavigate.addListener(listened => {
+        var doneGot = listened.url;
+
+        console.log("Allowed Urls: " + allowedUrls);
+
+        //For now, just comparing plain text strings until hashed urls in config are available
+        if (allowedUrls.indexOf(doneGot) !== -1) {
+
+            console.log("Header Changed");
+            // get the json file and X-Audit header
+            changeHeader(configUrl, doneGot)
+        }
+    })
+}
 
 function createHmac_And_Assemble(key, salt, message, done) {
     var saltedMessage = salt + message;
     var hMAC = CryptoJS.HmacSHA256(saltedMessage, key).toString();
 
     done(hMAC);
+}
+
+function changeHeader(configUrl, visitedUrl) {
+
+    //Checks if there is anything in the configUrl
+    console.log("Result: " + configUrl);
+
+    //gets json file from configUrl
+    $.ajax({url: configUrl, cache: false})
+        .done(function (json) {
+            //parses file and a store in variable, then stringifies and stores.
+            var parsed = JSON.parse(json);
+
+            var auditMessage = null;
+            var saltPrng = null;
+            var trimmedHmac = null;
+            var hexSalt = null;
+            var xAudit = "";
+            var prng = new Uint32Array(1);
+            passAudit = false;
+
+            console.log("Audit Status: " + passAudit);
+
+            //Creates a Message if the Audit has Passed, Failed, or is in an Unknown state.
+
+            function show_pass_fail(passes) {
+                var messageStatus = "";
+
+                if (passes != null) {
+                    if (passes) {
+                        messageStatus = "Passed";
+                    } else {
+                        messageStatus = "Failed";
+                    }
+                } else {
+                    messageStatus = "Unknown";
+                }
+                return messageStatus;
+            }
+
+            auditMessage = show_pass_fail(passAudit);
+
+            //Use SHA256 to turn the configuration file into a key"
+            var hashKey = CryptoJS.SHA256(configUrl);
+            console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
+
+            saltPrng = window.crypto.getRandomValues(prng);
+
+            console.log("Salted PRNG: " + saltPrng);
+
+            //Creates an HMAC and Assembles it.
+
+            createHmac_And_Assemble(hashKey, saltPrng, auditMessage, function (hMACKey) {
+                var convertString = new Number(saltPrng);
+
+                hmacLength = hMACKey.length - 16;
+                trimmedHmac = hMACKey.substring(0, hmacLength);
+                hexSalt = (convertString).toString(16).toUpperCase();
+
+                xAudit = auditMessage + " " + hexSalt + trimmedHmac;
+
+                console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
+                console.log("X-Audit: " + xAudit);
+
+                //Tells the website if the Audit has passed.
+                /*if (auditMessage === "Passed") {
+                    $.post(visitedUrl, 'xAudit', function (status) {
+                        console.log("Status: " + status);
+                    })
+                }
+                else if (auditMessage === "Failed") {
+                    console.log("Status: " + status);
+
+                }
+                else if (auditMessage === "Unknown") {
+
+                }*/
+            });
+        })
+        .fail(function (error) {
+            console.log(error);
+        });
 }
