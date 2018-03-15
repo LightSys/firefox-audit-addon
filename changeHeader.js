@@ -48,6 +48,7 @@ function createListener(configUrl, allowedUrls) {
     })
 }
 
+//Function for creating the HMAC Salted Encryption.
 function createHmac_And_Assemble(key, salt, message, done) {
     var saltedMessage = salt + message;
     var hMAC = CryptoJS.HmacSHA256(saltedMessage, key).toString();
@@ -134,5 +135,5 @@ function changeHeader(configUrl, visitedUrl) {
         })
         .fail(function (error) {
             console.log(error);
-        });
+        })
 }

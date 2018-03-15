@@ -7,7 +7,7 @@ The configuration file is written in JSON, and contains essential information fo
 ```json
 {
   "whitelist": [
-    {"name": "Chrome Audit Addon", "id": "bajpgljgpgcaihgkmgebfpngcnompgdp"}
+    {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"}
   ],
 
   "urlList": [
@@ -23,10 +23,9 @@ _Example:_
 ```json
 {
   "whitelist": [
-    {"name": "Chrome Audit Addon", "id": "bajpgljgpgcaihgkmgebfpngcnompgdp"},
-    {"name": "UBlock Origin", "id": "cjpalhdlnbpafiamejdnhcphjbkeiagm"},
-    {"name": "Web Developer", "id": "bfbameneiokkgbdmiekhjnmfkcnldhhm"},
-    {"name": "Plus for Trello", "id": "gjjpophepkbhejnglcmkdnncmaanojkf"}
+    {"name": "Firefox Audit Addon", "id": "audit@lightsys.org"},
+	{"name": "Twitch Now", "id": "jid1-jwVSihNsgAw5jA@jetpack"},
+	{"name": "uBlock Origin", "id": "uBlock0@raymondhill.net"}
   ],
 ```
 
