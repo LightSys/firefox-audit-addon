@@ -4,11 +4,12 @@ This file is a background page, which runs code asynchronously in the background
 
 #### Detailed Description (for developers)
 
-This script file contains two global variables, which are declared near the top of the file:
+This script file contains three global variables, which are declared near the top of the file:
 
 ```javascript
 var configUrl = null;
 var passAudit = null;
+var headerEntry = null;
 ```
 
 On installation, the script prompts the user for a configuration URL (the example configuration is the default value for the prompt). 
