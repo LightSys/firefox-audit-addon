@@ -46,7 +46,7 @@ function addAuditHeader(e, configUrl, allowedUrls) {
         // get the json file and X-Audit header
         var xAudit = changeHeader(configUrl, doneGot);
 
-        console.log(xAudit);
+        console.log("XAudit: " + xAudit);
         return {requestHeaders: e.requestHeaders};
     }
     return {requestHeaders: unchangedHeader};
