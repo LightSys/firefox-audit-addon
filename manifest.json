@@ -50,5 +50,6 @@
     "https://*/*",
 	"browserSettings",
 	"webNavigation"
+	"<all_urls>"
   ]
 }
