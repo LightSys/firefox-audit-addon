@@ -41,7 +41,6 @@
 },
 
   "permissions": [
-	"tabs",
 	"privacy",
     "management",
     "webRequest",

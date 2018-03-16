@@ -1,6 +1,7 @@
 ## About `backgroundPage.js`
 
-This file is a background page, which runs code asynchronously in the background at installation and during startup. After installation, the add-on queries for a configuration file URL, and checks to see if installed extensions are whitelisted. On startup, it checks if the currently enabled extensions are not on the whitelist, and alerts the user if they aren't. 
+This file is a background page, which runs code asynchronously in the background at installation and during startup. After installation, the add-on queries for a configuration file URL, and checks to see if installed extensions are whitelisted. On startup, it checks if the currently enabled extensions are not on the whitelist, and alerts the user if they aren't.
+This file also executes asynchronous functions to determine the pass/fail status and compute the HMAC.
 
 #### Detailed Description (for developers)
 
@@ -27,6 +28,18 @@ This requires the `chrome.management` API to run, sets the `passAudit` variable,
 _Alerting the user of non-approved extensions_  
 ![Alerting the user of non-approved extensions](https://raw.githubusercontent.com/LightSys/chrome-audit-addon/master/doc/backgroundPage.js_img/backgroundPage.js_img01.png)
 
-[View the source code for this file](../backgroundPage.js). 
+[View the source code for this file](../backgroundPage.js).
+
+Functions and methods used
+------------------------------------
+checkConfigFile(configUrl, suppressAlert): This function pulls the configuration file from the user defined URL and gets a list of the installed add-ons
+
+createHmac_And_Assemble(key, salt, message, done): This function takes in the concatenates the salt and message as mentioned in the requirements then creates the HMAC using the key which is then returned as a callback function.
+
+getConfigUrl(function()): This is where I had most of the coding take place after getting the configuration file.
+
+show_pass_fail(): This function returns the current message from the add-on.
+
+Encrytion: All encryption was done using the cryptojs file.
 
 [Return to the README.md file](../README.md)
