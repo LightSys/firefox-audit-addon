@@ -32,21 +32,32 @@ getConfigUrl(function (configUrl) {
         })
 });
 
+function addAuditHeader(e, configUrl, allowedUrls) {
+    var doneGot = e.url;
+
+    console.log("Allowed Urls: " + allowedUrls);
+    console.log(doneGot);
+
+    var unchangedHeader = e.requestHeaders;
+
+    //For now, just comparing plain text strings until hashed urls in config are available
+    if (allowedUrls.indexOf(doneGot) !== -1) {
+
+        console.log("Header Changed");
+        // get the json file and X-Audit header
+        var xAudit = changeHeader(configUrl, doneGot)
+
+        return {requestHeaders: e.requestHeaders}
+    }
+
+    else
+        return {requestHeaders: unchangedHeader};
+}
+
 function createListener(configUrl, allowedUrls) {
-    browser.webNavigation.onBeforeNavigate.addListener(listened => {
-        var doneGot = listened.url;
-
-        console.log("Allowed Urls: " + allowedUrls);
-        console.log(doneGot);
-
-        //For now, just comparing plain text strings until hashed urls in config are available
-        if (allowedUrls.indexOf(doneGot) !== -1) {
-
-            console.log("Header Changed");
-            // get the json file and X-Audit header
-            changeHeader(configUrl, doneGot)
-        }
-    })
+    browser.webRequest.onBeforeSendHeaders.addListener(listened => {
+        addAuditHeader(listened, configUrl, allowedUrls);
+    }, {urls: ["<all_urls>"]}, ["blocking", "requestHeaders"]);
 }
 
 //Function for creating the HMAC Salted Encryption.
@@ -119,18 +130,7 @@ function changeHeader(configUrl, visitedUrl) {
                 console.log("X-Audit: " + xAudit);
 
                 //Tells the website if the Audit has passed.
-                if (auditMessage === "Passed") {
-                    $.post(visitedUrl, xAudit, function (status) {
-                        console.log("Status: " + status);
-                    })
-                }
-                else if (auditMessage === "Failed") {
-                    console.log("Status: " + status);
-
-                }
-                else if (auditMessage === "Unknown") {
-
-                }
+                return xAudit;
             });
         })
         .fail(function (error) {

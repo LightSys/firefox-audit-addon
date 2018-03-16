@@ -49,7 +49,7 @@
     "webRequestBlocking",
     "https://*/*",
 	"browserSettings",
-	"webNavigation"
+	"webNavigation",
 	"<all_urls>"
   ]
 }
