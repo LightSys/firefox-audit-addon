@@ -76,6 +76,7 @@ function checkConfigFile(configUrl, suppressAlert) {
                         } else {
                             auditPassed(suppressAlert);
                         }
+                        console.log(passAudit);
                         setStatusAndHash(defaultUrl);
                     });
             });

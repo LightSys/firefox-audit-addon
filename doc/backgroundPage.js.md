@@ -32,7 +32,17 @@ _Alerting the user of non-approved extensions_
 
 Functions and methods used
 ------------------------------------
-checkConfigFile(configUrl, suppressAlert): This function pulls the configuration file from the user defined URL and gets a list of the installed add-ons
+checkConfigFile(configUrl, suppressAlert): This function pulls the configuration file from the user defined URL and calls getInstalledExtensions. This function then calls compareExtensions.
+
+getInstalledExtensions(done): This function retrieves an array of installed and enabled add-ons and calls back to checkConfigFile with the array.
+
+compareExtensions(whitelistIds, installedExtensions, done): This function compares the list of installed add-ons against the supplied white-list from the configuration file and assembles an array of bad add-ons. The function is passed a callback function which takes the array of bad add-ons and fails the audit if the bad add-ons array contains any values.
+
+auditPassed(suppressAlert): Assigns "True" to the passAudit variable, logs a success message to the console, and sets the bad add-ons array to null.
+
+auditFailed(badAddons, suppressAlert): Assigns "False" to the passAudit variable, logs an alert with failure message and list of bad add-ons to the console, and calls set_badAddons.
+
+
 
 createHmac_And_Assemble(key, salt, message, done): This function takes in the concatenates the salt and message as mentioned in the requirements then creates the HMAC using the key which is then returned as a callback function.
 
