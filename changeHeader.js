@@ -43,9 +43,8 @@ function addAuditHeader(e, configUrl, allowedUrls) {
     //For now, just comparing plain text strings until hashed urls in config are available
     if (allowedUrls.indexOf(doneGot) !== -1) {
 
-        console.log("Header Changed");
         // get the json file and X-Audit header
-        var xAudit = changeHeader(configUrl, doneGot)
+        var xAudit = changeHeader(configUrl, doneGot);
 
         console.log(xAudit);
         return {requestHeaders: e.requestHeaders};
