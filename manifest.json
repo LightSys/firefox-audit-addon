@@ -48,6 +48,7 @@
     "storage",
     "webRequestBlocking",
     "https://*/*",
-	"browserSettings"
+	"browserSettings",
+    "<all_urls>"
   ]
 }

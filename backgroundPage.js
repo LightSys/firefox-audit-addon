@@ -76,7 +76,6 @@ function checkConfigFile(configUrl, suppressAlert) {
                         } else {
                             auditPassed(suppressAlert);
                         }
-                        console.log(passAudit);
                         setStatusAndHash(defaultUrl);
                     });
             });
@@ -235,6 +234,7 @@ function setStatusAndHash(configUrl) {
             var trimmedHmac = null;
             var hexSalt = null;
             var prng = new Uint32Array(1);
+            var xAudit = "";
 
             console.log("Audit Status: " + passAudit);
 
@@ -278,10 +278,9 @@ function setStatusAndHash(configUrl) {
 
                 console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
                 console.log("X-Audit: " + xAudit);
-
-                //Tells the website if the Audit has passed.
-                headerEntry = {name: "X-Audit", value: xAudit};
             });
+            //Tells the website if the Audit has passed.
+            headerEntry = {name: "X-Audit", value: xAudit};
         })
         .fail(function (error) {
             console.log(error);
