@@ -75,15 +75,13 @@ This section defines the permanent ID of the extension so that it can be include
 
 ```json 
   "permissions": [
-	"tabs",
 	"privacy",
     "management",
     "webRequest",
     "storage",
     "webRequestBlocking",
     "https://*/*",
-	"browserSettings",
-	"webNavigation"
+	"browserSettings"
   ]
 }
 ```

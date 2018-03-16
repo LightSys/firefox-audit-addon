@@ -28,6 +28,12 @@ Requirements
 
 Functions and methods used
 ------------------------------------
+createHmac_And_Assemble(key, salt, message, done): This function takes in the concatenates the salt and message as mentioned in the requirements then creates the HMAC using the key which is then returned as a callback function.
 
+getConfigUrl(function()): This is where I had most of the coding take place after getting the configuration file.
+
+show_pass_fail(): This function returns the current message from the add-on.
+
+Encrytion: All encryption was done using the cryptojs file.
 
 [Return to the README.md file](../README.md)

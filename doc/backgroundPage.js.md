@@ -1,7 +1,6 @@
 ## About `backgroundPage.js`
 
-This file is a background page, which runs code asynchronously in the background at installation and during startup. After installation, the add-on queries for a configuration file URL, and checks to see if installed extensions are whitelisted. On startup, it checks if the currently enabled extensions are not on the whitelist, and alerts the user if they aren't.
-This file also executes asynchronous functions to determine the pass/fail status and compute the HMAC.
+This file is a background page, which runs code asynchronously in the background at installation and during startup. After installation, the add-on queries for a configuration file URL, and checks to see if installed extensions are whitelisted. On startup, it checks if the currently enabled extensions are not on the whitelist, and alerts the user if they aren't. 
 
 #### Detailed Description (for developers)
 
