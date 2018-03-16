@@ -81,27 +81,28 @@ This section defines the permanent ID of the extension so that it can be include
     "storage",
     "webRequestBlocking",
     "https://*/*",
-	"browserSettings"
+	"browserSettings",
+    "<all_urls>"
   ]
 }
 ```
 
-This requests the `"management"` permission from Chrome, which allows the add-on access to the `chrome.management` API.
+This requests several permissions from the user so that the extension can access different information and thereby carry out its intended purpose.
+Details of what each of these are used for are provided below:
 
 The `"privacy"` permission allows access and the ability to modify privacy-related browser settings.
-We will be looking into the implementation of this in the Firefox side of things.
+We did some looking into this but did not have time to fully explore what might be done with it. However, it does look promising and might be a viable way
+to audit privacy settings and perhaps security settings.
 
-The `"tabs"` permission allows the ability to get a list of opened tabs, filtered by various criteria, and to open, update, move, reload, and remove tabs.
-We are currently unsure as to whether this permission is still doing anything for us, as it is a port from the Chrome version, but we're going to keep it in here until we have time to test it.
+The `"management"` permission allows the add-on access to the `chrome.management` API.
 
-It also requests for `"webRequest"`, `"webRequestBlocking"`, and `"<all_urls>"` to make the required changes to headers when visiting secure sites.
+The `"webRequest"` and `"webRequestBlocking"` permissions allow us to make the required changes to headers when visiting secure sites.
+It also let us pull the URL from the browser before the user navigates to that location.
+
+`"storage"` requests for persistent storage, a place to maintain a consistent configuration file URL between Chrome sessions. 
 
 `"https://*/*"` is requesting permissions to access any https website and any of their extensions as well.
 
 The `"browserSettings"` permission enables our extension to modify certain global browser settings.
-
-The `"webNavigation"` permission is allowing us to pull the URL from the browser before the user navigates to a location.
-
-Finally, `"storage"` requests for persistent storage, a place to maintain a consistent configuration file URL between Chrome sessions. 
 
 [Return to the README.md file](../README.md)
