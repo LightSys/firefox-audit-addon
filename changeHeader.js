@@ -24,8 +24,7 @@ getConfigUrl(function (configUrl) {
     $.ajax({url: configUrl, cache: false})
         .done(function (json) {
             var parsed = JSON.parse(json);
-            var allowedUrlList = JSON.stringify(parsed.urlList);
-            createListener(configUrl, allowedUrlList);
+            createListener(configUrl, parsed.urlList.map(e => e.url));
         })
         .fail(function (error) {
             console.log(error);
@@ -38,24 +37,24 @@ function addAuditHeader(e, configUrl, allowedUrls) {
     console.log("Allowed Urls: " + allowedUrls);
     console.log(doneGot);
 
-    var unchangedHeader = e.requestHeaders;
-
     //For now, just comparing plain text strings until hashed urls in config are available
     if (allowedUrls.indexOf(doneGot) !== -1) {
 
         // get the json file and X-Audit header
         var xAudit = changeHeader(configUrl, doneGot);
 
-        console.log("XAudit: " + xAudit);
-        return {requestHeaders: e.requestHeaders};
+        console.log(xAudit);
+        e.requestHeaders.push(xAudit);
+        console.log("changed headers");
     }
-    return {requestHeaders: unchangedHeader};
+    console.log(e.requestHeaders);
+    return {requestHeaders: e.requestHeaders};
 }
 
 function createListener(configUrl, allowedUrls) {
     browser.webRequest.onBeforeSendHeaders.addListener(listened => {
         addAuditHeader(listened, configUrl, allowedUrls);
-    }, {urls: ["<all_urls>"]}, ["blocking", "requestHeaders"]);
+    }, {urls: allowedUrls}, ["blocking", "requestHeaders"]);
 }
 
 //Function for creating the HMAC Salted Encryption.
@@ -67,71 +66,76 @@ function createHmac_And_Assemble(key, salt, message, done) {
 }
 
 function changeHeader(configUrl, visitedUrl) {
-
     //Checks if there is anything in the configUrl
     console.log("Result: " + configUrl);
 
-    //gets json file from configUrl
-    $.ajax({url: configUrl, cache: false})
-        .done(function (json) {
-            //parses file and a store in variable, then stringifies and stores.
-            var parsed = JSON.parse(json);
-            var stringifiedConfig = JSON.stringify(parsed.whitelist);
-            var auditMessage = null;
-            var saltPrng = null;
-            var trimmedHmac = null;
-            var hexSalt = null;
-            var xAudit = "";
-            var prng = new Uint32Array(1);
+    getJsonFile(configUrl).then(json => {
+        //parses file and a store in variable, then stringifies and stores.
+        var parsed = JSON.parse(json);
+        var stringifiedConfig = JSON.stringify(parsed.whitelist);
+        var auditMessage = null;
+        var saltPrng = null;
+        var trimmedHmac = null;
+        var hexSalt = null;
+        var xAudit = "";
+        var prng = new Uint32Array(1);
 
-            console.log("Audit Status: " + passAudit);
+        console.log("Audit Status: " + passAudit);
 
-            //Creates a Message if the Audit has Passed, Failed, or is in an Unknown state.
+        //Creates a Message if the Audit has Passed, Failed, or is in an Unknown state.
 
-            function show_pass_fail(passes) {
-                var messageStatus = "";
+        function show_pass_fail(passes) {
+            var messageStatus = "";
 
-                if (passes != null) {
-                    if (passes) {
-                        messageStatus = "Passed";
-                    } else {
-                        messageStatus = "Failed";
-                    }
+            if (passes != null) {
+                if (passes) {
+                    messageStatus = "Passed";
                 } else {
-                    messageStatus = "Unknown";
+                    messageStatus = "Failed";
                 }
-                return messageStatus;
+            } else {
+                messageStatus = "Unknown";
             }
+            return messageStatus;
+        }
 
-            auditMessage = show_pass_fail(passAudit);
+        auditMessage = show_pass_fail(passAudit);
 
-            //Use SHA256 to turn the configuration file into a key"
-            var hashKey = CryptoJS.SHA256(stringifiedConfig);
-            console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
+        //Use SHA256 to turn the configuration file into a key"
+        var hashKey = CryptoJS.SHA256(stringifiedConfig);
+        console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
 
-            saltPrng = window.crypto.getRandomValues(prng);
+        saltPrng = window.crypto.getRandomValues(prng);
 
-            console.log("Salted PRNG: " + saltPrng);
+        console.log("Salted PRNG: " + saltPrng);
 
-            //Creates an HMAC and Assembles it.
+        //Creates an HMAC and Assembles it.
 
-            createHmac_And_Assemble(hashKey, saltPrng, auditMessage, function (hMACKey) {
-                var convertString = new Number(saltPrng);
+        createHmac_And_Assemble(hashKey, saltPrng, auditMessage, function (hMACKey) {
+            var convertString = new Number(saltPrng);
 
-                hmacLength = hMACKey.length - 16;
-                trimmedHmac = hMACKey.substring(0, hmacLength);
-                hexSalt = (convertString).toString(16).toUpperCase();
+            hmacLength = hMACKey.length - 16;
+            trimmedHmac = hMACKey.substring(0, hmacLength);
+            hexSalt = (convertString).toString(16).toUpperCase();
 
-                xAudit = auditMessage + " " + hexSalt + trimmedHmac;
+            xAudit = auditMessage + " " + hexSalt + trimmedHmac;
 
-                console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
-                console.log("X-Audit: " + xAudit);
+            console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
+            console.log("X-Audit: " + xAudit);
+            console.log({name: "X-Audit", value: xAudit});
 
-                //Tells the website if the Audit has passed.
-                return xAudit;
-            });
-        })
+            //Tells the website if the Audit has passed.
+            return {name: "X-Audit", value: xAudit};
+        });
+    });
+}
+
+async function getJsonFile(configUrl) {
+    //gets json file from configUrl
+    const json = await $.ajax({url: configUrl, cache: false})
         .fail(function (error) {
             console.log(error);
         })
+
+    return json;
 }
