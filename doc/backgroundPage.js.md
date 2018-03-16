@@ -31,6 +31,8 @@ _Alerting the user of non-approved extensions_
 
 Functions and methods used
 ------------------------------------
+getAndCheckConfig(suppressAlert): Checks if a configURL has been defined and calls checkConfigFile function.
+
 checkConfigFile(configUrl, suppressAlert): This function pulls the configuration file from the user defined URL and calls getInstalledExtensions. This function then calls compareExtensions.
 
 getInstalledExtensions(done): This function retrieves an array of installed and enabled add-ons and calls back to checkConfigFile with the array.
@@ -39,9 +41,21 @@ compareExtensions(whitelistIds, installedExtensions, done): This function compar
 
 auditPassed(suppressAlert): Assigns "True" to the passAudit variable, logs a success message to the console, and sets the bad add-ons array to null.
 
-auditFailed(badAddons, suppressAlert): Assigns "False" to the passAudit variable, logs an alert with failure message and list of bad add-ons to the console, and calls set_badAddons.
+auditFailed(badAddons, suppressAlert): Assigns "False" to the passAudit variable, logs an alert with failure message and list of bad add-ons to the console.
 
+set_options(configUrl): Sets the URL to the configuration file.
 
+set_badAddons(badAddons): Stores the constructed list of bad add-ons.
+
+set_passAudit(passAudit): Store the value of passAudit
+
+get_options(done): Retrieves the URL of the configuration file.
+
+get_badAddons(done): Retrieves the stored list of bad add-ons.
+
+get_passAudit(done): Retrieves the value of passAudit.
+
+setStatusAndHash(configUrl): This function pulls the configuration file and parses out the extension whitelist to use for creating the hash key. The function then also creates the Passed/Failed/Unkown message for sending to the server upon connection to a secured URL. The function then creates the key and salt for the hash function and calls createHmac_And_Assemble and stores the values of the X-Audit header to be attached with an HTTP request to a secure URL.
 
 createHmac_And_Assemble(key, salt, message, done): This function takes in the concatenates the salt and message as mentioned in the requirements then creates the HMAC using the key which is then returned as a callback function.
 
