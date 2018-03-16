@@ -75,7 +75,6 @@ This section defines the permanent ID of the extension so that it can be include
 
 ```json 
   "permissions": [
-	"tabs",
 	"privacy",
     "management",
     "webRequest",
@@ -89,9 +88,6 @@ This section defines the permanent ID of the extension so that it can be include
 
 This requests several permissions from the user so that the extension can access different information and thereby carry out its intended purpose.
 Details of what each of these are used for are provided below:
-
-The `"tabs"` permission allows the ability to get a list of opened tabs, filtered by various criteria, and to open, update, move, reload, and remove tabs.
-We are currently unsure as to whether this permission is still doing anything for us, as it is a port from the Chrome version, but we're going to keep it in here until we have time to test it.
 
 The `"privacy"` permission allows access and the ability to modify privacy-related browser settings.
 We did some looking into this but did not have time to fully explore what might be done with it. However, it does look promising and might be a viable way
