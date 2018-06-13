@@ -34,9 +34,11 @@ function show_pass_fail(passes) {
 * Triggered by clicking the "Run Audit" button in the popup, this runs an audit, 
 * and notifies the user of any failures.
 */
-function run_audit() {
-    bg.getAndCheckConfig(suppressAlert = false);
-}
+//The following function has been removed as it is no longer neccessary:
+//
+//function run_audit() {
+//    bg.getAndCheckConfig(suppressAlert = false);
+//}
 
 /**
  * Close the window
@@ -53,9 +55,10 @@ function close_window() {
 // 	});
 // }
 
+// The 'rerun' listeners have been removed as they are no longer necessary:
 // add listeners to rerun button
-document.getElementById('rerun').addEventListener('click', run_audit);
-document.getElementById('rerun').addEventListener('click', close_window);
+// document.getElementById('rerun').addEventListener('click', run_audit);
+// document.getElementById('rerun').addEventListener('click', close_window);
 
 
 // document.getElementById('list').addEventListener('click', list_BadAddons);
