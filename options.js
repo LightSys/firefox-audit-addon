@@ -1,4 +1,5 @@
 var configUrl = null;
+var bg = chrome.extension.getBackgroundPage();
 
 /**
  * Stores the add-on options to Firefox's persistent storage.
@@ -36,10 +37,11 @@ function get() {
     });
 }
 
-//Take the URL from the text box and set the configuration URL to that.
+//Take the URL from the text box and set the configuration URL to that. It also runs an audit.
 
 function set() {
     set_options(document.getElementById('urlText').value);
+	bg.getAndCheckConfig(suppressAlert = false);
 }
 
 // load url when on start
