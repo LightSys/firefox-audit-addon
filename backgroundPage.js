@@ -18,6 +18,7 @@
 
 
 var defaultUrl = "https://raw.githubusercontent.com/LightSys/firefox-audit-addon/master/files/testconfig.json";
+
 var passAudit = null;
 var headerEntry = null;
 
@@ -52,7 +53,7 @@ function checkConfigFile(configUrl, suppressAlert) {
     }
 
     // Get the json file from the configUrl and parse it.
-    $.ajax({url: configUrl, cache: false})
+    $.ajax({url: configUrl, cache: false, dataType: "text"})
         .done(function (json) {
             console.log(json);
             var parsedJson = JSON.parse(json);
@@ -76,7 +77,7 @@ function checkConfigFile(configUrl, suppressAlert) {
                         } else {
                             auditPassed(suppressAlert);
                         }
-                        setStatusAndHash(defaultUrl);
+                        setStatusAndHash(configUrl);
                     });
             });
         })
@@ -224,16 +225,17 @@ function setStatusAndHash(configUrl) {
     console.log("Result: " + configUrl);
 
     //gets json file from configUrl
-    $.ajax({url: configUrl, cache: false})
+    $.ajax({url: configUrl, cache: false, dataType: 'text'})
         .done(function (json) {
+			console.log(json);
             //parses file and a store in variable, then stringifies and stores.
-            var parsed = JSON.parse(json);
-            var stringifiedConfig = JSON.stringify(parsed.whitelist);
+            var parsed = JSON.parse(json); // not currently used
+            var stringifiedConfig = JSON.stringify(parsed); //not currently used
             var auditMessage = null;
-            var saltPrng = null;
+			var saltPrng = null;
             var trimmedHmac = null;
             var hexSalt = null;
-            var prng = new Uint32Array(1);
+            var prng = new Uint32Array(2);
             var xAudit = "";
 
             console.log("Audit Status: " + passAudit);
@@ -245,37 +247,38 @@ function setStatusAndHash(configUrl) {
 
                 if (passes != null) {
                     if (passes) {
-                        messageStatus = "Passed";
+                        messageStatus = "passed";
                     } else {
-                        messageStatus = "Failed";
+                        messageStatus = "failed";
                     }
                 } else {
                     messageStatus = "Unknown";
                 }
                 return messageStatus;
             }
+			
 
             auditMessage = show_pass_fail(passAudit);
 
             //Use SHA256 to turn the configuration file into a key"
-            var hashKey = CryptoJS.SHA256(stringifiedConfig);
-            console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
+            var hashKey = "" + CryptoJS.SHA256(json);
 
-            saltPrng = window.crypto.getRandomValues(prng);
+            console.log("Hash Key: " + hashKey + "\nShow Message: " + auditMessage);
+			
+			saltPrng = window.crypto.getRandomValues(prng);
+            hexSalt = pad((saltPrng[0].toString(16).toLowerCase()),8) + pad((saltPrng[1].toString(16).toLowerCase()),8);
 
             console.log("Salted PRNG: " + saltPrng);
 
             //Creates an HMAC and Assembles it.
 
-            createHmac_And_Assemble(hashKey, saltPrng, auditMessage, function (hMACKey) {
-                var convertString = new Number(saltPrng);
+            createHmac_And_Assemble(hashKey, hexSalt, auditMessage, function (hMACKey) {
 
                 hmacLength = hMACKey.length - 16;
-                trimmedHmac = hMACKey.substring(0, hmacLength);
-                hexSalt = (convertString).toString(16).toUpperCase();
+                trimmedHmac = hMACKey.substring(0, hmacLength); 
 
-                xAudit = auditMessage + " " + hexSalt + trimmedHmac;
-
+				xAudit = auditMessage + " " + hexSalt + trimmedHmac;
+	
                 console.log("This is the HMAC: " + hMACKey + "\nLength: " + hmacLength + "\nTrimmed HMAC: " + trimmedHmac);
                 console.log("X-Audit: " + xAudit);
             });
@@ -289,8 +292,25 @@ function setStatusAndHash(configUrl) {
 
 //Function for creating the HMAC Salted Encryption.
 function createHmac_And_Assemble(key, salt, message, done) {
-    var saltedMessage = salt + message;
-    var hMAC = CryptoJS.HmacSHA256(saltedMessage, key).toString();
+	var binKey = hex2str(key);
+	var saltedMessage = hex2str(salt + CryptoJS.enc.Utf8.parse(message).toString(CryptoJS.enc.Hex));
+    var hMAC = CryptoJS.HmacSHA256(saltedMessage, binKey).toString();
+	done(hMAC);
+}
 
-    done(hMAC);
+//Function for padding numbers with leading zeros:
+function pad(value, digits){
+	var zeroes = digits - value.length;
+	var strVal = value;
+	for (i = 0; i < zeroes; i++){
+		strVal = "0" + strVal;
+		}
+	return strVal;
+}
+
+//Takes a hex string and returns as a decoded string
+function hex2str(hex) {
+    var str = '';
+    str = CryptoJS.enc.Hex.parse(hex);
+    return str;
 }

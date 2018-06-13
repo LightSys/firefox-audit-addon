@@ -10,7 +10,7 @@
 */
 getConfigUrl(function (configUrl) {
     //gets json file from configUrl
-    $.ajax({url: configUrl, cache: false})
+    $.ajax({url: configUrl, cache: false, dataType: 'text'}) //didn't have the dataType
         .done(function (json) {
             var parsed = JSON.parse(json);
 
