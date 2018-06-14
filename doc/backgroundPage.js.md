@@ -64,6 +64,10 @@ getConfigUrl(function()): This is where I had most of the coding take place afte
 
 show_pass_fail(): This function returns the current message from the add-on.
 
+pad(value, digits): This function pads zeroes onto the front of numbers using a desired number of digits.
+
+hex2str(hex): Decodes a hex string to a binary string.
+
 Encrytion: All encryption was done using the cryptojs file.
 
 [Return to the README.md file](../README.md)
