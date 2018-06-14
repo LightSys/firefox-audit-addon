@@ -53,6 +53,8 @@ document.getElementById('save').addEventListener('click',
     set);
 document.getElementById('save').addEventListener('click',
     close_window);
+document.getElementById('cancel').addEventListener('click',
+    close_window);
 
 // add listener for enter key that calls the save button when clicked
 document.getElementById('urlText').addEventListener('keyup', function (event) {

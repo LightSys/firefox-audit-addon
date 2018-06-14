@@ -7,13 +7,18 @@
         </style>
     </head>
     <body>
-        <div>
-            <label>
-                Please enter the URL of the config file:
-                <input type="text" id="urlText" style="width:300px; float: left"/>
-                <button type="button" id="save" style="float: right">Save</button>
-            </label>
+        <div style="padding: 5px">
+            <label>Please enter the URL of the configuration file that will be used to run an audit:</label>
+			<br>
+            <input type="text" id="urlText" style="width:550px; margin: 10px 0px"/>
+			<br>
+            <button type="button" id="save">Save</button>
+			<button type="button" id="cancel">Cancel</button>
         </div>
+		<style>
+		    #save { margin: 0px 0px 0px 210px; width: 60px; }
+			#cancel { width: 60px; }
+		</style>
         <script src="options.js"></script>
     </body>
 </html>
