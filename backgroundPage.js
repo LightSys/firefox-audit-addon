@@ -208,7 +208,7 @@ function getConfigUrl(done) {
 }
 
 function get_badAddons(done) {
-    chrome.storage.sync.get("badAddons", function (items) {
+    chrome.storage.sync.get("BadAddons", function (items) { //badAddons
         done(items.BadAddons);
     });
 }

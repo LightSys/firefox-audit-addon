@@ -7,7 +7,7 @@ var bg = chrome.extension.getBackgroundPage();
 var passAudit = bg.passAudit;
 show_pass_fail(passAudit);
 
-// show_list(passAudit);
+show_list(passAudit);
 
 function show_pass_fail(passes) {
     if (passes != null) {
@@ -24,11 +24,11 @@ function show_pass_fail(passes) {
     }
 }
 
-// function show_list(passes){
-// 	if (!passes) {
-// 		$("#buttonDiv").append("<button href='#' id='list'>List</button>");
-// 	}
-// }
+function show_list(passes){
+	if (!passes) {
+		$("#BadAddonDetails").append("<a href='#' id='details'>Details...</a>");
+	}
+}
 
 /*
 * Triggered by clicking the "Run Audit" button in the popup, this runs an audit, 
@@ -47,13 +47,13 @@ function close_window() {
     window.close();
 }
 
-// function list_BadAddons(){
-// 	console.log("BadAddons: \n");
-// 	bg.get_badAddons(function(badAddons){
-// 		console.log(badAddons);
-// 		alert("Bad Addons: \n" + badAddons.join("\n"));
-// 	});
-// }
+function list_BadAddons(){
+ console.log("BadAddons: \n");
+	bg.get_badAddons(function(badAddons){
+		console.log(badAddons.join("\n")); // added the .join("\n")
+		alert("Bad Addons: \n" + badAddons.join("\n"));
+	});
+}
 
 // The 'rerun' listeners have been removed as they are no longer necessary:
 // add listeners to rerun button
@@ -61,5 +61,5 @@ function close_window() {
 // document.getElementById('rerun').addEventListener('click', close_window);
 
 
-// document.getElementById('list').addEventListener('click', list_BadAddons);
-// document.getElementById('list').addEventListener('click', close_window);
+document.getElementById('details').addEventListener('click', list_BadAddons);
+//document.getElementById('list').addEventListener('click', close_window);
