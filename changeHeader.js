@@ -57,8 +57,6 @@ function checkUpdates(e, configUrl, allowedUrls, urlUpdates) {
 //Checks the last day the config file was updated
 function onceADay(updateUrl){
     var date = new Date().toLocaleDateString();
-	console.log(date);
-	chrome.storage.sync.set({"UpdateDate": "10/27/2018"},function(){console.log("Date updated")});
     var lastUpdate;
 	chrome.storage.sync.get("UpdateDate", function(item){
 		lastUpdate = item.UpdateDate;
