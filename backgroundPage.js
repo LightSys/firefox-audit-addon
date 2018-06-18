@@ -18,7 +18,6 @@
 
 
 var defaultUrl = "https://raw.githubusercontent.com/LightSys/firefox-audit-addon/master/files/testconfig.json";
-
 var passAudit = null;
 var headerEntry = null;
 
