@@ -7,7 +7,7 @@ var bg = chrome.extension.getBackgroundPage();
  */
 
 function set_options(theConfigUrl) {
-    browser.storage.sync.set({"ConfigUrl": theConfigUrl}, function () {
+    chrome.storage.sync.set({"ConfigUrl": theConfigUrl}, function () {
         console.log("Wrote url successfully (url: " + theConfigUrl + ")");
     });
 }
@@ -17,7 +17,7 @@ function set_options(theConfigUrl) {
  * @Return done, the configuration file URL
  */
 function get_options(done) {
-    browser.storage.sync.get("ConfigUrl", function (items) {
+    chrome.storage.sync.get("ConfigUrl", function (items) {
         done(items.ConfigUrl);
     });
 }

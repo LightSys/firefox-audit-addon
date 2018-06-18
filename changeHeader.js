@@ -39,7 +39,7 @@ function addAuditHeader(e, configUrl, allowedUrls) {
 }
 
 function createListener(configUrl, allowedUrls, urlUpdates) {
-    browser.webRequest.onBeforeSendHeaders.addListener(listened => {
+    chrome.webRequest.onBeforeSendHeaders.addListener(listened => {
 		checkUpdates(listened, configUrl, allowedUrls, urlUpdates);
         return addAuditHeader(listened, configUrl, allowedUrls);
     }, {urls: allowedUrls}, ["blocking", "requestHeaders"]);
