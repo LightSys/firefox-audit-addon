@@ -19,7 +19,7 @@ getConfigUrl(function (configUrl) {
         .done(function (json) {
             var parsed = JSON.parse(json);
 
-            createListener(configUrl, parsed.urlList.map(e => e.url));
+            createListener(configUrl, parsed.urlList.map(e => e.url), parsed.urlList.map(e => e.updates));
         })
         .fail(function (error) {
             console.log(error);
@@ -53,12 +53,54 @@ This function returns the value of the X-Audit header.
 ```js
 function createListener(configUrl, allowedUrls) {
     browser.webRequest.onBeforeSendHeaders.addListener(listened => {
+	    checkUpdates(listened, configUrl, allowedUrls, urlUpdates);
         return addAuditHeader(listened, configUrl, allowedUrls);
     }, {urls: allowedUrls}, ["blocking", "requestHeaders"]);
 }
 ```
 
-The createListener function is an object that, when created, snags the header and doesn't allow it to continue until our 
+The createListener function is an object that, when created, will call the checkUpdates function to see if updates are needed, 
+and then snags the header and doesn't allow it to continue until our 
 X-Audit header is added to the list of headers and sent on its way.
 
+```js
+function checkUpdates(e, configUrl, allowedUrls, urlUpdates) {
+	var doneGot = e.url;
+	var updateUrl;
+	if (allowedUrls.indexOf(doneGot) !== -1) {
+		updateUrl = doneGot + urlUpdates[(allowedUrls.indexOf(doneGot))].substr(1);
+		onceADay(updateUrl);
+	}
+}
+```
+
+The checkUpdates function will check if the current url is on the list, and then will use the update url (specified in the config file)
+when calling the onceADay function. 
+
+```js
+function onceADay(updateUrl){
+    var date = new Date().toLocaleDateString();
+    var lastUpdate;
+	chrome.storage.sync.get("UpdateDate", function(item){
+		lastUpdate = item.UpdateDate;
+		if( lastUpdate !== date ){
+			updateConfig(updateUrl);
+			chrome.storage.sync.set({"UpdateDate": date},function(){console.log("Date updated to " + date)});
+		}
+	});
+}
+```
+
+The onceADay function checks the last day that the config file was updated, and if it is not today, it will call the updateConfig function
+to update the configuration file, and will update the update date to be today.
+
+```js
+function updateConfig(updateUrl){
+	chrome.storage.sync.set({"ConfigUrl": updateUrl}, function () {
+		console.log("Wrote url successfully (url: " + updateUrl + ")")});
+	bg.getAndCheckConfig(suppressAlert = false);
+}
+```
+
+The updateConfig function sets the configuration file as the updated configuration file.
 [Return to the README.md file](../README.md)
