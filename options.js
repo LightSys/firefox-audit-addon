@@ -5,6 +5,7 @@ var bg = chrome.extension.getBackgroundPage();
  * Stores the add-on options to Firefox's persistent storage.
  * @Param theConfigUrl, the web address of the configuration file.
  */
+
 function set_options(theConfigUrl) {
     browser.storage.sync.set({"ConfigUrl": theConfigUrl}, function () {
         console.log("Wrote url successfully (url: " + theConfigUrl + ")");
@@ -53,6 +54,8 @@ document.getElementById('save').addEventListener('click',
     set);
 document.getElementById('save').addEventListener('click',
     close_window);
+	
+// add listeners to cancel button
 document.getElementById('cancel').addEventListener('click',
     close_window);
 

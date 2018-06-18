@@ -47,6 +47,7 @@ chrome.management.onDisabled.addListener(function () {
 /**
  * Downloads the latest config file, and runs the audit on the browser.
  */
+
 function checkConfigFile(configUrl, suppressAlert) {
     if (configUrl == null) {
         return;
