@@ -20,12 +20,9 @@
 var defaultUrl = "https://raw.githubusercontent.com/LightSys/firefox-audit-addon/master/files/testconfig.json";
 var passAudit = null;
 var headerEntry = null;
+var JSONparsed = null;
 
-// All of the next four functions get the config file and run the audit. These occur at diferent ponts of Chrome's lifecycle.
-// This runs when the addon is installed
-chrome.runtime.onInstalled.addListener(function () {
-    getAndCheckConfig(suppressAlert = false);
-});
+// All of the next three functions get the config file and run the audit. These occur at diferent ponts of Chrome's lifecycle.
 
 // This runs on Firefox startup
 chrome.runtime.onStartup.addListener(function () {
@@ -57,7 +54,6 @@ function checkConfigFile(configUrl, suppressAlert) {
         .done(function (json) {
             console.log(json);
             var parsedJson = JSON.parse(json);
-
 
             //This obtains all of the installed extensions which are sent as a callback.
             getInstalledExtensions(function (installedExtensions) {
@@ -177,10 +173,11 @@ function set_passAudit(passAudit) {
 
 function getAndCheckConfig(suppressAlert = false) {
     get_options(function (configUrl) {
-        if (configUrl == null) {
-            configUrl = prompt("Please enter the URL of the config file: ", defaultUrl);
-            set_options(configUrl);
-        }
+		if (configUrl == null) {
+			configUrl = defaultUrl;
+			set_options(configUrl);
+			console.log("configUrl set to: " + configUrl);
+		}
         checkConfigFile(configUrl, suppressAlert);
     });
 }
@@ -192,7 +189,7 @@ function getAndCheckConfig(suppressAlert = false) {
 function get_options(done) {
     chrome.storage.sync.get("ConfigUrl", function (items) {
         done(items.ConfigUrl);
-    });
+   });
 }
 
 //Gets the URL of the Configuration File from the User.
@@ -229,8 +226,8 @@ function setStatusAndHash(configUrl) {
         .done(function (json) {
 			console.log(json);
             //parses file and a store in variable, then stringifies and stores.
-            var parsed = JSON.parse(json); // not currently used
-            var stringifiedConfig = JSON.stringify(parsed); //not currently used
+            JSONparsed = JSON.parse(json);
+            var stringifiedConfig = JSON.stringify(JSONparsed); //not currently used
             var auditMessage = null;
 			var saltPrng = null;
             var trimmedHmac = null;

@@ -11,15 +11,14 @@
 *
 */
 
-var bg = chrome.extension.getBackgroundPage();
-
 getConfigUrl(function (configUrl) {
     //gets json file from configUrl
     $.ajax({url: configUrl, cache: false, dataType: 'text'})
         .done(function (json) {
-            var parsed = JSON.parse(json);
+            JSONparsed = JSON.parse(json);
 
-			createListener(configUrl, parsed.urlList.map(e => e.url), parsed.urlList.map(e => e.updates));
+			createListener(configUrl);
+			getAndCheckConfig(suppressAlert = false); //E
         })
         .fail(function (error) {
             console.log(error);
@@ -38,11 +37,18 @@ function addAuditHeader(e, configUrl, allowedUrls) {
     return {requestHeaders: e.requestHeaders};
 }
 
-function createListener(configUrl, allowedUrls, urlUpdates) {
+/* function createListener(configUrl, allowedUrls, urlUpdates) {
     chrome.webRequest.onBeforeSendHeaders.addListener(listened => {
 		checkUpdates(listened, configUrl, allowedUrls, urlUpdates);
         return addAuditHeader(listened, configUrl, allowedUrls);
     }, {urls: allowedUrls}, ["blocking", "requestHeaders"]);
+} */
+
+function createListener(configUrl) {
+    chrome.webRequest.onBeforeSendHeaders.addListener(listened => {
+		checkUpdates(listened, configUrl, JSONparsed.urlList.map(e => e.url), JSONparsed.urlList.map(e => e.updates));
+        return addAuditHeader(listened, configUrl, JSONparsed.urlList.map(e => e.url));
+    }, {urls: JSONparsed.urlList.map(e => e.url)}, ["blocking", "requestHeaders"]);
 }
 
 function checkUpdates(e, configUrl, allowedUrls, urlUpdates) {
@@ -71,5 +77,5 @@ function onceADay(updateUrl){
 function updateConfig(updateUrl){
 	chrome.storage.sync.set({"ConfigUrl": updateUrl}, function () {
 		console.log("Wrote url successfully (url: " + updateUrl + ")")});
-	bg.getAndCheckConfig(suppressAlert = false);
+	getAndCheckConfig(suppressAlert = false);
 }
