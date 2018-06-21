@@ -18,7 +18,7 @@ getConfigUrl(function (configUrl) {
             JSONparsed = JSON.parse(json);
 
 			createListener(configUrl);
-			getAndCheckConfig(suppressAlert = false); //E
+			getAndCheckConfig(suppressAlert = false);
         })
         .fail(function (error) {
             console.log(error);
@@ -36,13 +36,6 @@ function addAuditHeader(e, configUrl, allowedUrls) {
     }
     return {requestHeaders: e.requestHeaders};
 }
-
-/* function createListener(configUrl, allowedUrls, urlUpdates) {
-    chrome.webRequest.onBeforeSendHeaders.addListener(listened => {
-		checkUpdates(listened, configUrl, allowedUrls, urlUpdates);
-        return addAuditHeader(listened, configUrl, allowedUrls);
-    }, {urls: allowedUrls}, ["blocking", "requestHeaders"]);
-} */
 
 function createListener(configUrl) {
     chrome.webRequest.onBeforeSendHeaders.addListener(listened => {
