@@ -19,7 +19,8 @@ getConfigUrl(function (configUrl) {
         .done(function (json) {
             var parsed = JSON.parse(json);
 
-            createListener(configUrl, parsed.urlList.map(e => e.url), parsed.urlList.map(e => e.updates));
+            createListener(configUrl);
+			getAndCheckConfig(suppressAlert = false);
         })
         .fail(function (error) {
             console.log(error);
@@ -29,7 +30,8 @@ getConfigUrl(function (configUrl) {
 
 The getConfigUrl function acquires the json file from the configUrl variable and returns a done or a fail
 event. After the done event it creates a listener which is set up (as seen below) to grab the header once it's called.
-After the fail event it logs the error into the console.
+After the fail event it logs the error into the console. It will also call the getAndCheckConfig function which will result
+in the user being prompted for a config url when the add-on is installed.
 
 ```js
 function addAuditHeader(e, configUrl, allowedUrls) {
@@ -98,9 +100,10 @@ to update the configuration file, and will update the update date to be today.
 function updateConfig(updateUrl){
 	chrome.storage.sync.set({"ConfigUrl": updateUrl}, function () {
 		console.log("Wrote url successfully (url: " + updateUrl + ")")});
-	bg.getAndCheckConfig(suppressAlert = false);
+	getAndCheckConfig(suppressAlert = false);
 }
 ```
 
 The updateConfig function sets the configuration file as the updated configuration file.
+
 [Return to the README.md file](../README.md)
